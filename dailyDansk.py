@@ -4,7 +4,6 @@ import ssl
 from email.message import EmailMessage
 
 username=os.environ.get('userUSERuser')
-print(username)
 password=os.environ.get('PASS')
 print(password, username)
 
@@ -34,9 +33,3 @@ try:
     print ("Email sent successfully!")
 except Exception as ex:
     print ("Something went wrong….",ex)
-
-
-# context = ssl.create_default_context()
-# with smtplib.SMTP_SSL('smtp.gmail.com',  465 , context=context) as smtp:
-#     smtp.login(email_sender, email_password)
-#     smtp.sendmail(email_sender, email_receiver, em.as_string())
