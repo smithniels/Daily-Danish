@@ -24,7 +24,19 @@ em['To'] = username
 em['Subject'] = subject
 em.set_content(body)
 
-context = ssl.create_default_context()
-with smtplib.SMTP_SSL('smtp.gmail.com',  997 , context=context) as smtp:
-    smtp.login(email_sender, email_password)
-    smtp.sendmail(email_sender, email_receiver, em.as_string())
+
+try:
+    smtp_server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+    smtp_server.ehlo()
+    smtp_server.login(username, password)
+    smtp_server.sendmail(username,username, body)
+    smtp_server.close()
+    print ("Email sent successfully!")
+except Exception as ex:
+    print ("Something went wrong….",ex)
+
+
+# context = ssl.create_default_context()
+# with smtplib.SMTP_SSL('smtp.gmail.com',  465 , context=context) as smtp:
+#     smtp.login(email_sender, email_password)
+#     smtp.sendmail(email_sender, email_receiver, em.as_string())
