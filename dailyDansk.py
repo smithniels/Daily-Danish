@@ -1,10 +1,9 @@
-
 # DAILY DANISH PYTHON CODE
 
 import os
 import smtplib
 import ssl
-import random
+from random import choice
 import subprocess
 import base64
 from email.message import EmailMessage
@@ -15,49 +14,58 @@ from email.mime.image import MIMEImage
 from email import encoders
 
 
-# Email Set Up
+# Email Set Up from local environment
 username=os.environ.get('userUSERuser')
 password=os.environ.get('PASS')
-print(password, username)
+
 
 email_sender = username
 email_password = password
 email_receiver = username
-subject = '''this is from Niels to Niels'''
+subject = '''\
+    this is from Niels to Niels
+'''
 
 
 # Image Selection (This needs to be fixed/rewritten!)
 path="/Users/nielssmith/Documents/GitHub/Daily-Danish"
 files=os.listdir(path)
-d=random.choice(files) 
+d=choice(files) 
 # subprocess.call(['open', d])
-
 
 data = open(d, 'rb').read() # read bytes from file
 data_base64 = base64.b64encode(data)  # encode to base64 (bytes)
 data_base64 = data_base64.decode()    # convert bytes to string 
-text = ''' Howdy, hey'''
-html = '<img src="data:image/png;base64,' + data_base64 + '">' # embed in html
-open('output-png.html', 'w').write(html)
- 
+
+message = """From: Niels Smith
+To: Niels Smith
+Subject: Niels Test Email
+
+TextGoesHere
+"""
+# html = '<img src="data:image/png;base64,' + data_base64 + '">' # embed in html as str
+# open('output.html', 'w').write(html) 
+
+
+
 
 
 # Turn these into plain/html MIMEText objects
-part1 = MIMEText(text, "plain")
-part2 = MIMEText(html, "html")
+part1 = MIMEText(message, "plain")
+# part2 = MIMEText(html, "html")
 
 em = EmailMessage()
 
 # Add HTML/plain-text parts to MIMEMultipart message
 # The email client will try to render the last part first
 em.attach(part1)
-em.attach(part2)
+# em.attach(part2)
 
 
 em['From'] = username
 em['To'] = username
 em['Subject'] = subject
-em.set_content(html)
+em.set_content(em)
  
 filename = d  # In same directory as script
 
@@ -69,15 +77,18 @@ with open(filename, "rb") as attachment:
     part.set_payload(attachment.read())
 
 # Encode file in ASCII characters to send by email    
-encoders.encode_base64(part2)
+encoders.encode_base64(part1)
 
 
 try:
     smtp_server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
     smtp_server.ehlo()
     smtp_server.login(username, password)
-    smtp_server.sendmail(username,username, html)
+    smtp_server.sendmail(username,username, message)
     smtp_server.close()
     print ("Email sent successfully!")
 except Exception as ex:
     print ("Oh dear, something went wrong….",ex)
+    
+    
+    
