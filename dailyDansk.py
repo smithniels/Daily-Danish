@@ -23,22 +23,23 @@ print(password, username)
 email_sender = username
 email_password = password
 email_receiver = username
-subject = 'this is from Niels to Niels'
+subject = '''this is from Niels to Niels'''
 
 
 # Image Selection (This needs to be fixed/rewritten!)
 path="/Users/nielssmith/Documents/GitHub/Daily-Danish"
 files=os.listdir(path)
 d=random.choice(files) 
-subprocess.call(['open', d])
+# subprocess.call(['open', d])
 
 
 data = open(d, 'rb').read() # read bytes from file
 data_base64 = base64.b64encode(data)  # encode to base64 (bytes)
 data_base64 = data_base64.decode()    # convert bytes to string 
-html = '<img src="data:image/jpeg;base64,' + data_base64 + '">' # embed in html
 text = ''' Howdy, hey'''
-open('output-jpg.html', 'w').write(html)
+html = '<img src="data:image/png;base64,' + data_base64 + '">' # embed in html
+open('output-png.html', 'w').write(html)
+ 
 
 
 # Turn these into plain/html MIMEText objects
@@ -49,7 +50,7 @@ em = EmailMessage()
 
 # Add HTML/plain-text parts to MIMEMultipart message
 # The email client will try to render the last part first
-# em.attach(part1)
+em.attach(part1)
 em.attach(part2)
 
 
