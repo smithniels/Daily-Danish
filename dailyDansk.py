@@ -39,26 +39,18 @@ data_base64 = data_base64.decode()    # convert bytes to string
 
 message = """From: Niels Smith
 To: Niels Smith
-Subject: Niels Test Email
+Subject: Daily Danish niels smith
 
 TextGoesHere
 """
-# html = '<img src="data:image/png;base64,' + data_base64 + '">' # embed in html as str
-# open('output.html', 'w').write(html) 
 
-
-
-
-
-# Turn these into plain/html MIMEText objects
+# Turn these into plain (later html) MIMEText objects
 part1 = MIMEText(message, "plain")
-# part2 = MIMEText(html, "html")
-
 em = EmailMessage()
-
-# Add HTML/plain-text parts to MIMEMultipart message
-# The email client will try to render the last part first
 em.attach(part1)
+
+
+
 # em.attach(part2)
 
 
