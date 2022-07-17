@@ -61,15 +61,16 @@ em.set_content(em)
  
 filename = d  # In same directory as script
 
-# # Open file in binary mode
-with open(filename, "rb") as attachment:
-    # Add file as application/octet-stream
-    # Email client can usually download this automatically as attachment
-    part = MIMEBase("application", "octet-stream")
-    part.set_payload(attachment.read())
 
-# Encode file in ASCII characters to send by email    
-encoders.encode_base64(part1)
+#  I never got the below working. I think the initial code is correct, but I wasn't able to figure out how to get it into the email =/
+# # # Open file in binary mode
+# with open(filename, "rb") as attachment:
+#     # Add file as application/octet-stream
+#     # Email client can usually download this automatically as attachment
+#     part = MIMEBase("application", "octet-stream")
+#     part.set_payload(attachment.read())
+# # Encode file in ASCII characters to send by email    
+# encoders.encode_base64(part1)
 
 
 try:
