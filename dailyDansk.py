@@ -1,5 +1,7 @@
 # DAILY DANISH PYTHON CODE
 
+# TODO put those images into a csv file to be read into the emails
+
 import os
 import smtplib
 import ssl
@@ -8,9 +10,9 @@ import subprocess
 import base64
 from email.message import EmailMessage
 from email.mime.base import MIMEBase
+from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from email.mime.image import MIMEImage
 from email import encoders
 
 
@@ -48,18 +50,12 @@ TextGoesHere
 part1 = MIMEText(message, "plain")
 em = EmailMessage()
 em.attach(part1)
-
-
-
-# em.attach(part2)
-
-
 em['From'] = username
 em['To'] = username
 em['Subject'] = subject
 em.set_content(em)
- 
-filename = d  # In same directory as script
+
+# filename = d  # In same directory as script
 
 
 #  I never got the below working. I think the initial code is correct, but I wasn't able to figure out how to get it into the email =/
