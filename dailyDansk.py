@@ -6,7 +6,7 @@ import os
 import smtplib
 import ssl
 from random import choice
-import subprocess
+import subprocess #opens the image files on desktop
 import base64
 from email.message import EmailMessage
 from email.mime.base import MIMEBase
@@ -14,13 +14,13 @@ from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email import encoders
-
+ 
 
 # Email Set Up from local environment
 username=os.environ.get('userUSERuser')
 password=os.environ.get('PASS')
 
-
+msg = 'Hey, are you reading this message? y/n'
 email_sender = username
 email_password = password
 email_receiver = username
@@ -43,8 +43,8 @@ message = """From: Niels Smith
 To: Niels Smith
 Subject: Daily Danish niels smith
 
-TextGoesHere
-"""
+%s
+"""  % (msg)
 
 # Turn these into plain (later html) MIMEText objects
 part1 = MIMEText(message, "plain")
@@ -78,6 +78,3 @@ try:
     print ("Email sent successfully!")
 except Exception as ex:
     print ("Oh dear, something went wrong….",ex)
-    
-    
-    
