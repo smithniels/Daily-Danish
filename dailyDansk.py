@@ -1,8 +1,6 @@
 # DAILY DANISH PYTHON CODE
 "Alright, I forgot how much I liked working with Python. I put together an automated email sender for sending daily Danish translations. I've been trying to jot down Danish words I run into to look up their translations. The script I have running will email daily with a few randomly selected translations"
 
-
-
 # TODO put those images into a csv file to be read into the emails
 
 import os
@@ -28,9 +26,8 @@ email_sender = username
 email_password = password
 email_receiver = username
 subject = '''\
-    this is from Niels to Niels
+    An email from Niels to Niels
 '''
-
 
 # Image Selection (This needs to be fixed/rewritten!)
 path="/Users/nielssmith/Documents/GitHub/Daily-Danish"
@@ -60,7 +57,6 @@ em.set_content(em)
 
 # filename = d  # In same directory as script
 
-
 #  I never got the below working. I think the initial code is correct, but I wasn't able to figure out how to get it into the email =/
 # # # Open file in binary mode
 # with open(filename, "rb") as attachment:
@@ -70,7 +66,6 @@ em.set_content(em)
 #     part.set_payload(attachment.read())
 # # Encode file in ASCII characters to send by email    
 # encoders.encode_base64(part1)
-
 
 try:
     smtp_server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
