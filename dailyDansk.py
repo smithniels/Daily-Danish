@@ -2,6 +2,7 @@
 "Alright, I think it's been about a whole minute. I forgot how much I liked writing Python! I put together an automated email sender that sends daily Danish translations for words that I've come across. The script I have running will email daily with a few randomly selected translations. >Link to code repo<"
 
 # TODO put those images into a csv file to be read into the emails
+# TODO I don't think all of these imports are being used (encoder/subprocess/ CSV should probably be swapped for pandas)
 
 import os
 import smtplib
