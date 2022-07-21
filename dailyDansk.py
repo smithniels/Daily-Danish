@@ -6,6 +6,7 @@
 import os
 import smtplib
 import ssl
+import csv
 from random import choice
 import subprocess #opens the image files on desktop
 import base64
@@ -15,6 +16,8 @@ from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email import encoders
+# Import CSV file
+file = open('/Users/nielssmith/Documents/GitHub/Daily-Danish/translations.csv') 
  
 
 # Email Set Up from local environment
