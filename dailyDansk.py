@@ -1,9 +1,6 @@
 # DAILY DANISH PYTHON CODE
 "Alright, I forgot how much I liked working with Python. I put together an automated email sender for sending daily Danish translations. I've been trying to jot down Danish words I run into to look up their translations. The script I have running will email daily with a few randomly selected translations"
 
-# TODO put those images into a csv file to be read into the emails
-
-
 import os
 import smtplib
 import csv
