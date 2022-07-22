@@ -16,6 +16,7 @@ from email.mime.base import MIMEBase
 from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from email.policy import default
 from email import encoders
 
 # Import CSV file
@@ -30,9 +31,6 @@ with open(
         rows.append(row)
         print(row)
 
-# print(rows)
-
-
 # Email Set Up from local environment
 username = os.environ.get("userUSERuser")
 password = os.environ.get("PASS")
@@ -41,9 +39,7 @@ msg = "Hey, are you reading this message? y/n"
 email_sender = username
 email_password = password
 email_receiver = username
-subject = """\
-    Daily Danish niels smith
-"""
+subject = 'Daily Danish niels smith'
 
 # Image Selection (This needs to be fixed/rewritten!)
 path = "/Users/nielssmith/Documents/GitHub/Daily-Danish"
@@ -52,38 +48,28 @@ d = choice(files)
 dataB = open(d, "rb").read()  # read bytes from file
 data_base64 = base64.b64encode(dataB)  # encode to base64 (bytes)
 data_base64 = data_base64.decode()  # convert bytes to string
-
-message = """
-From: Niels Smith
-To: Niels Smith
-Subject: Daily Danish niels smith
-
-<<<<<<< HEAD
-{}{}
-""".format('text will go here',' and then  more text will go here')
-=======
-
-%s
-""" % (
-    msg
-)
->>>>>>> parent of a089db5 (from %s to .format())
+message = '''
+{}
+'''.format('Lorem Ipsum')
 
 # Turn these into plain (later html) MIMEText objects
 part1 = MIMEText(message, "plain")
 em = EmailMessage()
 em.attach(part1)
+em['Subject'] = f'subject'
 em["From"] = username
 em["To"] = username
-em["Subject"] = subject
 em.set_content(em)
-
 
 try:
     smtp_server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
     smtp_server.ehlo()
     smtp_server.login(username, password)
+    print('This is the subject: ',subject)
     smtp_server.sendmail(username, username, message)
+    print('To:', em['to'])
+    print('From:', em['from'])
+    print('Subject:', em['subject'])
     smtp_server.close()
     print("Email sent successfully!")
 except Exception as ex:
