@@ -34,32 +34,30 @@ with open(
 # Email Set Up from local environment
 username = os.environ.get("userUSERuser")
 password = os.environ.get("PASS")
-
 msg = "Hey, are you reading this message? y/n"
 email_sender = username
 email_password = password
 email_receiver = username
-subject = '''\ 
+text='This text will appear in the body of the email'
+subject = ''' 
 ''' #just leave this blank. it needs to be here, but it doesn't require text 🤷
-
-# Image Selection (This needs to be fixed/rewritten!)
 path = "/Users/nielssmith/Documents/GitHub/Daily-Danish"
-files = os.listdir(path)
+files=[i for i in os.listdir() if os.path.isfile(i)]
 d = choice(files)
 dataB = open(d, "rb").read()  # read bytes from file
 data_base64 = base64.b64encode(dataB)  # encode to base64 (bytes)
 data_base64 = data_base64.decode()  # convert bytes to string
 message = '''From: Niels Smith
 To: Niels Smith
-Subject: Daily Danish niels smith
+Subject: Daily Danish Words
 {}
-'''.format('Lorem Ipsum')
+'''.format(text)
 
 # Turn these into plain (later html) MIMEText objects
 part1 = MIMEText(message, "plain")
 em = EmailMessage()
 em.attach(part1)
-em['Subject'] = f'subject'
+em['Subject'] = subject
 em["From"] = username
 em["To"] = username
 em.set_content(em)
@@ -68,11 +66,8 @@ try:
     smtp_server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
     smtp_server.ehlo()
     smtp_server.login(username, password)
-    print('This is the subject: ',subject)
+    print('This is the subject: ', subject)
     smtp_server.sendmail(username, username, message)
-    print('To:', em['to'])
-    print('From:', em['from'])
-    print('Subject:', em['subject'])
     smtp_server.close()
     print("Email sent successfully!")
 except Exception as ex:
