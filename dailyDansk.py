@@ -2,22 +2,15 @@
 "Alright, I forgot how much I liked working with Python. I put together an automated email sender for sending daily Danish translations. I've been trying to jot down Danish words I run into to look up their translations. The script I have running will email daily with a few randomly selected translations"
 
 # TODO put those images into a csv file to be read into the emails
-# TODO I don't think all of these imports are being used (encoder/subprocess/ CSV should probably be swapped for pandas)
+
 
 import os
 import smtplib
-import ssl
 import csv
 from random import choice
-import subprocess  # opens the image files on desktop
 import base64
 from email.message import EmailMessage
-from email.mime.base import MIMEBase
-from email.mime.image import MIMEImage
-from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from email.policy import default
-from email import encoders
 
 # Import CSV file
 header = []
