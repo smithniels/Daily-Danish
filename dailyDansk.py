@@ -1,6 +1,11 @@
+#  coding: utf-8
 # DAILY DANISH PYTHON CODE
-"Alright, I forgot how much I liked working with Python. I put together an automated email sender for sending daily Danish translations. I've been trying to jot down Danish words I run into to look up their translations. The script I have running will email daily with a few randomly selected translations"
+"Alright, I forgot how much I liked working with Python. I put together an automated email sender for sending daily Danish translations. I've been trying to jot down Danish words I run into to look up their translations later. The script I have running will email daily with a few randomly selected translations pulled from a CSV file. Pretty nifty."
 
+
+# TODO I'm getting an encoding error occasionally "u'\u2013'.encode('utf-8')" might be the solution, but I don't know where to stick that. that's what she said
+
+u'\u2013'.encode('utf-8')
 import os
 import smtplib
 import csv
@@ -17,9 +22,16 @@ with open(
 ) as file:
     csvreader = csv.reader(file)
     header = next(csvreader)
+    words = list(csvreader)
+    word1 = choice(words)
+    word2 = choice(words)
+    word3 = choice(words)
+    # print('these are the word: \n {} \n {} \n {}'.format(word1,word2,word3))
     for row in csvreader:
         rows.append(row)
         print(row)
+
+
 
 # Email Set Up from local environment
 username = os.environ.get("userUSERuser")
@@ -28,7 +40,7 @@ msg = "Hey, are you reading this message? y/n"
 email_sender = username
 email_password = password
 email_receiver = username
-text='This text will appear in the body of the email'
+text= '{} \n {} \n {}'.format(word1,word2,word3)
 subject = ''' 
 ''' #just leave this blank. it needs to be here, but it doesn't require text 🤷
 path = "/Users/nielssmith/Documents/GitHub/Daily-Danish"
@@ -56,7 +68,6 @@ try:
     smtp_server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
     smtp_server.ehlo()
     smtp_server.login(username, password)
-    print('This is the subject: ', subject)
     smtp_server.sendmail(username, username, message)
     smtp_server.close()
     print("Email sent successfully!")
