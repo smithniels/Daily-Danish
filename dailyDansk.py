@@ -4,6 +4,9 @@
 
 
 # TODO I'm getting an encoding error occasionally "u'\u2013'.encode('utf-8')" might be the solution, but I don't know where to stick that. that's what she said
+# TODO Set up chrontab to run programs on the daily 
+# TODO Add in the HTML MIME for part2
+# TODO Add in dansk ord fra din dansk oversætter list
 
 u'\u2013'.encode('utf-8')
 import os
