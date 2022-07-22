@@ -39,7 +39,8 @@ msg = "Hey, are you reading this message? y/n"
 email_sender = username
 email_password = password
 email_receiver = username
-subject = 'Daily Danish niels smith'
+subject = '''\ 
+''' #just leave this blank. it needs to be here, but it doesn't require text 🤷
 
 # Image Selection (This needs to be fixed/rewritten!)
 path = "/Users/nielssmith/Documents/GitHub/Daily-Danish"
@@ -48,7 +49,9 @@ d = choice(files)
 dataB = open(d, "rb").read()  # read bytes from file
 data_base64 = base64.b64encode(dataB)  # encode to base64 (bytes)
 data_base64 = data_base64.decode()  # convert bytes to string
-message = '''
+message = '''From: Niels Smith
+To: Niels Smith
+Subject: Daily Danish niels smith
 {}
 '''.format('Lorem Ipsum')
 
