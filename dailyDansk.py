@@ -42,7 +42,7 @@ email_sender = username
 email_password = password
 email_receiver = username
 subject = """\
-    An email from Niels to Niels
+    Daily Danish niels smith
 """
 
 # Image Selection (This needs to be fixed/rewritten!)
@@ -53,10 +53,10 @@ dataB = open(d, "rb").read()  # read bytes from file
 data_base64 = base64.b64encode(dataB)  # encode to base64 (bytes)
 data_base64 = data_base64.decode()  # convert bytes to string
 
-message = """From: Niels Smith
+message = """
+From: Niels Smith
 To: Niels Smith
 Subject: Daily Danish niels smith
-
 
 {}{}
 """.format('text will go here',' and then  more text will go here')
