@@ -14,12 +14,17 @@ import smtplib
 import csv
 import string
 import base64
+
+
 from random import choice
 from email.message import EmailMessage
 from email.mime.text import MIMEText
 from email import encoders
 
 allowed = string.ascii_letters +"æøå"
+
+
+
 
 # Import CSV file
 header = []
@@ -77,7 +82,7 @@ try:
     smtp_server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
     smtp_server.ehlo() # Hostname to send for this command defaults to the FQDN of the local host.
     smtp_server.login(username, password)
-    # smtp_server.sendmail(username, username, message)
+    smtp_server.sendmail(username, username, message)
     smtp_server.close()
     print("Email sent successfully!")
 except Exception as ex:
