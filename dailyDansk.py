@@ -14,7 +14,7 @@ import smtplib
 import csv
 import string
 import base64
-
+import codecs
 
 from random import choice
 from email.message import EmailMessage
@@ -22,8 +22,6 @@ from email.mime.text import MIMEText
 from email import encoders
 
 allowed = string.ascii_letters +"æøå"
-
-
 
 
 # Import CSV file
@@ -35,7 +33,11 @@ with open(
     csvreader = csv.reader(file)
     header = next(csvreader) # Return the next item from the iterator.
     words = list(csvreader) 
-    word1 = choice(words) # choose a random element 
+    word1 = choice(words) # choose a random element
+    wordA=' '.join(word1)
+    print(type(wordA))
+    print(wordA)
+    wordB = codecs.encode(wordA,'utf-8')
     # word2 = choice(words)
     # word3 = choice(words)
     # print('these are the words: \n {} \n {} \n {}'.format(word1,word2,word3))
@@ -50,7 +52,6 @@ msg = "Hey, are you reading this message? y/n"
 email_sender = username
 email_password = password
 email_receiver = username
-
 subject = ''' 
 ''' #just leave this blank. it needs to be here, but it doesn't require any text 🤷
 path = "/Users/nielssmith/Documents/GitHub/Daily-Danish"
@@ -61,7 +62,7 @@ data_base64 = base64.b64encode(dataB)  # encode to base64 (bytes)
 data_base64 = data_base64.decode()  # convert bytes to string
 
 
-text= '\n {} \n'.format(word1)
+text= '\n {} \n'.format(wordB)
 # text.decode('iso-8859-1')
 message = '''From: Niels Smith
 To: Niels Smith
