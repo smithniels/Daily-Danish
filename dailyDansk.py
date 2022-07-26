@@ -23,7 +23,6 @@ from email import encoders
 
 allowed = string.ascii_letters +"æøå"
 
-
 # Import CSV file
 header = []
 rows = []
@@ -33,17 +32,22 @@ with open(
     csvreader = csv.reader(file)
     header = next(csvreader) # Return the next item from the iterator.
     words = list(csvreader) 
-    word1 = choice(words) # choose a random element
-    wordA=' '.join(word1)
-    print(type(wordA))
-    print(wordA)
+    word1 = choice(words) # choose a random element (type: list)
+    wordA=' : '.join(word1)
+    # print(type(wordA))
+    
     wordB = codecs.encode(wordA,'utf-8')
-    # word2 = choice(words)
-    # word3 = choice(words)
-    # print('these are the words: \n {} \n {} \n {}'.format(word1,word2,word3))
+    encoding = 'utf-8'
+    wordC = wordB.decode(encoding)
+    text= '\n {} \n'.format(wordC)
     for row in csvreader:
         rows.append(row)
         print(row)
+        
+    print('wordA type: ',type(wordA), wordA)
+    print('wordB type: ',type(wordB), wordB)
+    print('wordC type: ',type(wordC), wordC)
+    print('text  type: ',type(text), text)
 
 # Email Set Up from local environment
 username = os.environ.get("userUSERuser")
@@ -62,8 +66,8 @@ data_base64 = base64.b64encode(dataB)  # encode to base64 (bytes)
 data_base64 = data_base64.decode()  # convert bytes to string
 
 
-text= '\n {} \n'.format(wordB)
-# text.decode('iso-8859-1')
+
+
 message = '''From: Niels Smith
 To: Niels Smith
 Subject: Daily Danish
@@ -88,12 +92,3 @@ try:
     print("Email sent successfully!")
 except Exception as ex:
     print("Oh dear, something went wrong...", ex)
-    
-    
-def tell_me_about(s): 
-    print(s) 
-    return (type(s), s)
-
-# v = "\xC4pple"
-# uv = v.bytes.decode("iso-8859-1")
-# print(tell_me_about(v)
