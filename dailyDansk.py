@@ -14,12 +14,16 @@ import smtplib
 import csv
 import string
 import base64
-import codecs
+
 
 from random import choice
 from email.message import EmailMessage
 from email.mime.text import MIMEText
 from email import encoders
+
+from codecs import decode
+from codecs import encode
+from codecs import open
 
 allowed = string.ascii_letters +"æøå"
 
@@ -27,23 +31,26 @@ allowed = string.ascii_letters +"æøå"
 header = []
 rows = []
 with open(
-    "/Users/nielssmith/Documents/GitHub/Daily-Danish/translations.csv", "r"
+    "/Users/nielssmith/Documents/GitHub/Daily-Danish/translations.csv", "r",encoding='utf-8'
 ) as file:
     csvreader = csv.reader(file)
     header = next(csvreader) # Return the next item from the iterator.
     words = list(csvreader) 
+    # words = decode(words)
     word1 = choice(words) # choose a random element (type: list)
     wordA=' : '.join(word1)
     # print(type(wordA))
     
-    wordB = codecs.encode(wordA,'utf-8')
-    encoding = 'utf-8'
-    wordC = wordB.decode(encoding)
+    wordB = encode(wordA,'utf-8')
+
+    wordC = wordB.decode()
+   
     text= '\n {} \n'.format(wordC)
     for row in csvreader:
         rows.append(row)
         print(row)
-        
+    
+    # What's going on...?
     print('wordA type: ',type(wordA), wordA)
     print('wordB type: ',type(wordB), wordB)
     print('wordC type: ',type(wordC), wordC)
@@ -64,8 +71,6 @@ d = choice(files)
 dataB = open(d, "rb").read()  # read bytes(rb) from file <<<  "rb" mode opens the file in binary format for reading
 data_base64 = base64.b64encode(dataB)  # encode to base64 (bytes)
 data_base64 = data_base64.decode()  # convert bytes to string
-
-
 
 
 message = '''From: Niels Smith
