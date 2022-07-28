@@ -13,17 +13,13 @@ import os
 import smtplib
 import csv
 import string
+import sys
 import base64
-
-
 from random import choice
 from email.message import EmailMessage
 from email.mime.text import MIMEText
 from email import encoders
-
-from codecs import decode
-from codecs import encode
-from codecs import open
+from codecs import decode, encode, open
 
 allowed = string.ascii_letters +"æøå"
 
@@ -36,13 +32,9 @@ with open(
     csvreader = csv.reader(file)
     header = next(csvreader) # Return the next item from the iterator.
     words = list(csvreader) 
-    # words = decode(words)
     word1 = choice(words) # choose a random element (type: list)
     wordA=' : '.join(word1)
-    # print(type(wordA))
-    
     wordB = encode(wordA,'utf-8')
-
     wordC = wordB.decode()
    
     text= '\n {} \n'.format(wordC)
@@ -50,11 +42,11 @@ with open(
         rows.append(row)
         print(row)
     
-    # What's going on...?
-    print('wordA type: ',type(wordA), wordA)
-    print('wordB type: ',type(wordB), wordB)
-    print('wordC type: ',type(wordC), wordC)
-    print('text  type: ',type(text), text)
+# What's going on...?
+print('wordA type: ',type(wordA), wordA)
+print('wordB type: ',type(wordB), wordB)
+print('wordC type: ',type(wordC), wordC)
+print('text  type: ',type(text), text)
 
 # Email Set Up from local environment
 username = os.environ.get("userUSERuser")
@@ -97,3 +89,6 @@ try:
     print("Email sent successfully!")
 except Exception as ex:
     print("Oh dear, something went wrong...", ex)
+
+
+# print(sys.getdefaultencoding()) # utf-8
