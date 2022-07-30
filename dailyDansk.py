@@ -2,7 +2,6 @@ u'\u2013'.encode('utf-8')
 # DAILY DANISH PYTHON CODE
 "Alright, I forgot how much I liked working with Python. I put together an automated email sender for sending daily Danish translations. I've been trying to jot down Danish words I run into to look up their translations later. The script I have running will email daily with a few randomly selected translations pulled from a CSV file. Pretty nifty."
 
-
 # TODO I'm getting an encoding error occasionally "u'\u2013'.encode('utf-8')" might be the solution, but I don't know where to stick that. that's what she said
 # TODO Set up Chron Tab to run programs on the daily 
 # TODO Add in the HTML MIME for part2 --> MIMEText(message, "html")
@@ -21,21 +20,23 @@ from email.mime.text import MIMEText
 from email import encoders
 from codecs import decode, encode, open
 
-allowed = string.ascii_letters +"æøå"
+print('This is the start! This is the start! This is the start! This is the start! This is the start! ')
+allowed = string.ascii_letters +"æøå" #what is this even for? it's not doing what I hoped it would... :(
 
 # Import CSV file
 header = []
 rows = []
 with open(
-    "/Users/nielssmith/Documents/GitHub/Daily-Danish/translations.csv", "r",encoding='utf-8'
-) as file:
+    "/Users/nielssmith/Documents/GitHub/Daily-Danish/translations.csv", "r",encoding='utf-8-sig') as file:
     csvreader = csv.reader(file)
     header = next(csvreader) # Return the next item from the iterator.
     words = list(csvreader) 
+    # print('words[0] type: ',type(words[0]), words[0]) # Type: List
     word1 = choice(words) # choose a random element (type: list)
-    wordA=' : '.join(word1)
-    wordB = encode(wordA,'utf-8')
-    wordC = wordB.decode()
+    # print('word1 type: ',type(word1), word1) #Type: List
+    wordA=' : '.join(word1) # Type: String
+    wordB = encode(wordA,'utf-8') # Type: Bytes # this is where the string is converted to bytes
+    wordC = wordB.decode()  # Type: String # this is where the bytes are converted to string
    
     text= '\n {} \n'.format(wordC)
     for row in csvreader:
@@ -43,10 +44,10 @@ with open(
         print(row)
     
 # What's going on...?
-print('wordA type: ',type(wordA), wordA)
-print('wordB type: ',type(wordB), wordB)
+# print('wordA type: ',type(wordA), wordA)
+# print('wordB type: ',type(wordB), wordB)
 print('wordC type: ',type(wordC), wordC)
-print('text  type: ',type(text), text)
+# print('text  type: ',type(text), text)
 
 # Email Set Up from local environment
 username = os.environ.get("userUSERuser")
@@ -62,8 +63,10 @@ files=[i for i in os.listdir() if os.path.isfile(i)] # I def can't explain fully
 d = choice(files)
 dataB = open(d, "rb").read()  # read bytes(rb) from file <<<  "rb" mode opens the file in binary format for reading
 data_base64 = base64.b64encode(dataB)  # encode to base64 (bytes)
+print('this is data_base64 post encode(): ',data_base64)
 data_base64 = data_base64.decode()  # convert bytes to string
-
+print('this is type() of data_base64 post decode()',type(data_base64))
+print('this is data_base64: ',data_base64)
 
 message = '''From: Niels Smith
 To: Niels Smith
@@ -91,4 +94,3 @@ except Exception as ex:
     print("Oh dear, something went wrong...", ex)
 
 
-# print(sys.getdefaultencoding()) # utf-8
