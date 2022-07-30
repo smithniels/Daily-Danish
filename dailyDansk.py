@@ -33,7 +33,7 @@ with open(
     wordB = encode(wordA,'utf-8') # Type: Bytes # this is where the string is converted to bytes
     wordC = wordB.decode()  # Type: String # this is where the bytes are converted to string
    
-    text= '\n {} \n'.format(wordC)
+    text= '\n {} \n IF YOU\'RE READING THIS THAN CRONTAB WORKED! WOOH'.format(wordC)
     for row in csvreader:
         rows.append(row)
         print(row)
