@@ -1,8 +1,6 @@
 u'\u2013'.encode('utf-8')
 # DAILY DANISH PYTHON CODE
 
-# TODO I'm getting an encoding error occasionally "u'\u2013'.encode('utf-8')" might be the solution, but I don't know where to stick that. that's what she said
-# TODO Set up Chron Tab to run programs on the daily 
 # TODO Add in the HTML MIME for part2 --> MIMEText(message, "html")
 # TODO Add in dansk ord fra din dansk oversætter list
 
@@ -19,7 +17,7 @@ from email.mime.text import MIMEText
 from email import encoders
 from codecs import decode, encode, open
 
-print('This is the start! This is the start! This is the start! This is the start! This is the start! ')
+
 allowed = string.ascii_letters +"æøå" #what is this even for? it's not doing what I hoped it would... :(
 
 # Import CSV file
@@ -30,9 +28,7 @@ with open(
     csvreader = csv.reader(file)
     header = next(csvreader) # Return the next item from the iterator.
     words = list(csvreader) 
-    # print('words[0] type: ',type(words[0]), words[0]) # Type: List
     word1 = choice(words) # choose a random element (type: list)
-    # print('word1 type: ',type(word1), word1) #Type: List
     wordA=' : '.join(word1) # Type: String
     wordB = encode(wordA,'utf-8') # Type: Bytes # this is where the string is converted to bytes
     wordC = wordB.decode()  # Type: String # this is where the bytes are converted to string
@@ -41,12 +37,7 @@ with open(
     for row in csvreader:
         rows.append(row)
         print(row)
-    
-# What's going on...?
-# print('wordA type: ',type(wordA), wordA)
-# print('wordB type: ',type(wordB), wordB)
-print('wordC type: ',type(wordC), wordC)
-# print('text  type: ',type(text), text)
+
 
 # Email Set Up from local environment
 username = os.environ.get("userUSERuser")
@@ -56,16 +47,13 @@ email_sender = username
 email_password = password
 email_receiver = username
 subject = ''' 
-''' #just leave this blank. it needs to be here, but it doesn't require any text 🤷
+''' # THERE MUST BE AN OBJECT. EVEN AN EMPTY ONE! 🤷
 path = "/Users/nielssmith/Documents/GitHub/Daily-Danish"
 files=[i for i in os.listdir() if os.path.isfile(i)] # I def can't explain fully how this one liner works... 
 d = choice(files)
 dataB = open(d, "rb").read()  # read bytes(rb) from file <<<  "rb" mode opens the file in binary format for reading
 data_base64 = base64.b64encode(dataB)  # encode to base64 (bytes)
-# print('this is data_base64 post encode(): ',data_base64)
 data_base64 = data_base64.decode()  # convert bytes to string
-# print('this is type() of data_base64 post decode()',type(data_base64))
-# print('this is data_base64: ',data_base64)
 
 message = '''From: Niels Smith
 To: Niels Smith
