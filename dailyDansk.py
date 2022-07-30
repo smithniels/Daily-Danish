@@ -1,6 +1,5 @@
 u'\u2013'.encode('utf-8')
 # DAILY DANISH PYTHON CODE
-"Alright, I forgot how much I liked working with Python. I put together an automated email sender for sending daily Danish translations. I've been trying to jot down Danish words I run into to look up their translations later. The script I have running will email daily with a few randomly selected translations pulled from a CSV file. Pretty nifty."
 
 # TODO I'm getting an encoding error occasionally "u'\u2013'.encode('utf-8')" might be the solution, but I don't know where to stick that. that's what she said
 # TODO Set up Chron Tab to run programs on the daily 
@@ -63,10 +62,10 @@ files=[i for i in os.listdir() if os.path.isfile(i)] # I def can't explain fully
 d = choice(files)
 dataB = open(d, "rb").read()  # read bytes(rb) from file <<<  "rb" mode opens the file in binary format for reading
 data_base64 = base64.b64encode(dataB)  # encode to base64 (bytes)
-print('this is data_base64 post encode(): ',data_base64)
+# print('this is data_base64 post encode(): ',data_base64)
 data_base64 = data_base64.decode()  # convert bytes to string
-print('this is type() of data_base64 post decode()',type(data_base64))
-print('this is data_base64: ',data_base64)
+# print('this is type() of data_base64 post decode()',type(data_base64))
+# print('this is data_base64: ',data_base64)
 
 message = '''From: Niels Smith
 To: Niels Smith
@@ -74,8 +73,9 @@ Subject: Daily Danish
 {}
 '''.format(text)
 
+message=message.encode('utf-8')
 # Turn these into plain (TODO later add in html) MIMEText objects
-part1 = MIMEText(message, "plain")
+part1 = MIMEText(message, "plain", "utf-8")
 em = EmailMessage()
 em.attach(part1)
 em['Subject'] = subject
