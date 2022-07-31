@@ -3,7 +3,8 @@ u'\u2013'.encode('utf-8')
 
 # TODO Add in the HTML MIME for part2 --> MIMEText(message, "html")
 # TODO Add in dansk ord fra din dansk oversætter list
-
+# TODO display more than 1 pair of words 
+# TODO Figure out what's not working with CRONtab
 
 import os
 import smtplib
@@ -16,9 +17,6 @@ from email.message import EmailMessage
 from email.mime.text import MIMEText
 from email import encoders
 from codecs import decode, encode, open
-
-
-allowed = string.ascii_letters +"æøå" #what is this even for? it's not doing what I hoped it would... :(
 
 # Import CSV file
 header = []
@@ -38,7 +36,6 @@ with open(
         rows.append(row)
         print(row)
 
-
 # Email Set Up from local environment
 username = os.environ.get("userUSERuser")
 password = os.environ.get("PASS")
@@ -47,7 +44,7 @@ email_sender = username
 email_password = password
 email_receiver = username
 subject = ''' 
-''' # THERE MUST BE AN OBJECT. EVEN AN EMPTY ONE! 🤷
+''' # THERE MUST BE AN SUBJECT. EVEN AN EMPTY ONE! 🤷
 path = "/Users/nielssmith/Documents/GitHub/Daily-Danish"
 files=[i for i in os.listdir() if os.path.isfile(i)] # I def can't explain fully how this one liner works... 
 d = choice(files)
@@ -60,7 +57,6 @@ To: Niels Smith
 Subject: Daily Danish
 {}
 '''.format(text)
-
 message=message.encode('utf-8')
 # Turn these into plain (TODO later add in html) MIMEText objects
 part1 = MIMEText(message, "plain", "utf-8")
