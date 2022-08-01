@@ -2,9 +2,8 @@ u'\u2013'.encode('utf-8')
 # DAILY DANISH PYTHON CODE
 
 # TODO Add in the HTML MIME for part2 --> MIMEText(message, "html")
-# TODO Add in dansk ord fra din dansk oversætter list
-# TODO display more than 1 pair of words 
-# TODO Figure out what's not working with CRONtab
+# TODO display more than 1 pair of words
+# TODO Figure out what's not working with Crontab
 
 import os
 import smtplib
