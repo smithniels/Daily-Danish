@@ -17,6 +17,18 @@ from email.mime.text import MIMEText
 from email import encoders
 from codecs import decode, encode, open
 
+
+
+import logging
+# import log_helper as log
+import logger_helper.LoggerHelper 
+import helper
+
+# get logger
+log = log.logHelper('logfile.log')
+log.info("Got logger")
+
+# logging.info('hi')
 # Import CSV file
 header = []
 rows = []
@@ -30,7 +42,8 @@ with open(
     wordB = encode(wordA,'utf-8') # Type: Bytes # this is where the string is converted to bytes
     wordC = wordB.decode()  # Type: String # this is where the bytes are converted to string
    
-    text= '\n {} \n IF YOU\'RE READING THIS THAN CRONTAB WORKED! WOOH'.format(wordC)
+    # text= '\n {} \n IF YOU\'RE READING THIS THAN CRONTAB WORKED! WOOH'.format(wordC)
+    text= '\n {} \n '.format(wordC)
     for row in csvreader:
         rows.append(row)
         print(row)
