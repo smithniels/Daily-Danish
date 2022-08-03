@@ -17,12 +17,9 @@ from email.mime.text import MIMEText
 from email import encoders
 from codecs import decode, encode, open
 import logging
-# import log_helper as log
-import logger_helper.LoggerHelper 
 import helper
-
 # get logger
-log = log.logHelper('logfile.log')
+log = helper.logHelper('logfile.log')
 log.info("Got logger")
 
 # logging.info('hi')
