@@ -4,14 +4,18 @@ import logging
 
 def logHelper(fileName, logLevel=logging.INFO, useConsole=True):
     """
-    Simple Logging Helper. Retuens logger reference.
+    Simple Logging Helper. Returns logger reference.
 
     Paramsmeters:
     fileName: Filename, may include full path, or will open a file in default folder
     logLevel: Pass logging.INFO, logging.DEBUG or other enums for logging level
-    useConsole: If Ture, will also dump log to console
+    useConsole: If True, will also dump log to console
+    
+    Code for main file header:
+        import helper
+        log = helper.logHelper('logfile.log')
     """
-
+     
     ##### init logging
     log = logging.getLogger()
     log.setLevel(logLevel)
