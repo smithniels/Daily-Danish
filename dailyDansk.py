@@ -34,11 +34,11 @@ with open(
     words = list(csvreader)
     word1 = choice(words)  # choose a random element (type: list)
     wordA = " : ".join(word1)  # Type: String
-    wordB = encode(
+    wordB = encode( #  Transforms to type: string to bytes 
         wordA, "utf-8"
-    )  # Type: Bytes # this is where the string is converted to bytes
-    wordC = (
-        wordB.decode() # Type: String # this is where the bytes are converted to string
+    )
+    wordC = ( # Transforms to type: bytes to string
+        wordB.decode() 
     )
     text = "\n {} \n ".format(wordC)
     for row in csvreader: 
@@ -48,6 +48,8 @@ with open(
 # Email Set Up from local environment
 username = os.environ.get("userUSERuser")
 password = os.environ.get("PASS")
+
+# Message set up
 msg = "Hey, are you reading this message? y/n"
 email_sender = username
 email_password = password
@@ -63,7 +65,7 @@ dataB = open(
     d, "rb"
 ).read()  # read bytes(rb) from file <<<  "rb" mode opens the file in binary format for reading
 data_base64 = base64.b64encode(dataB)  # encode to base64 (bytes)
-data_base64 = data_base64.decode()  # convert bytes to string
+data_base64 = data_base64.decode()  # convert bytes64 to string
 
 message = """From: Niels Smith
 To: Niels Smith
