@@ -27,7 +27,7 @@ rows = []
 with open(
     "/Users/nielssmith/Documents/GitHub/Daily-Danish/translations.csv",
     "r",
-    encoding='utf-8', # this was 'utf-8-sig', but I switched it to just 'utf-8', and it still works /shrugemoji
+    encoding='utf-8', # this was set to 'utf-8-sig', but I switched it to just 'utf-8', and it still works 🤷
 ) as file:
     csvreader = csv.reader(file)
     header = next(csvreader)  # Return the next item from the iterator.
@@ -40,6 +40,7 @@ with open(
     wordC = ( # Transforms to type: bytes to string
         wordB.decode() 
     )
+    # Why exactly is all of that necessary?
     text = "\n {} \n ".format(wordC)
     for row in csvreader: 
         rows.append(row)

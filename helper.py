@@ -1,8 +1,31 @@
 #file log_helper.py
-import os, sys
+import os
+import sys
 import logging
 
 def logHelper(fileName, logLevel=logging.INFO, useConsole=True):
+    ##### init logging
+    log = logging.getLogger()
+    log.setLevel(logLevel)
+    logFormatter = logging.Formatter("%(asctime)s | %(threadName)-12.12s | %(levelname)-5.5s | %(message)s")
+
+    ##### file handler
+    fileOut = logging.FileHandler(fileName)
+    fileOut.setFormatter(logFormatter)
+    log.addHandler(fileOut)
+    
+
+    ##### console handler
+    if useConsole:
+        consoleOut = logging.StreamHandler(sys.stdout)
+        consoleOut.setFormatter(logFormatter)
+        log.addHandler(consoleOut)
+
+
+    return log
+
+
+
     """
     Simple Logging Helper. Returns logger reference.
 
@@ -15,22 +38,3 @@ def logHelper(fileName, logLevel=logging.INFO, useConsole=True):
         import helper
         log = helper.logHelper('logfile.log')
     """
-     
-    ##### init logging
-    log = logging.getLogger()
-    log.setLevel(logLevel)
-    logFormatter = logging.Formatter("%(asctime)s | %(threadName)-12.12s | %(levelname)-5.5s | %(message)s")
-
-    ##### file handler
-    fileOut = logging.FileHandler(fileName)
-    fileOut.setFormatter(logFormatter)
-    log.addHandler(fileOut)
-
-    ##### console handler
-    if useConsole:
-        consoleOut = logging.StreamHandler(sys.stdout)
-        consoleOut.setFormatter(logFormatter)
-        log.addHandler(consoleOut)
-
-    ##### return reference
-    return log

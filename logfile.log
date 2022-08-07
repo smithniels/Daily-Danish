@@ -9,3 +9,16 @@
 2022-08-05 17:44:27,394 | MainThread   | INFO  | Got logger
 2022-08-05 17:44:37,209 | MainThread   | INFO  | Got logger
 2022-08-05 17:44:40,876 | MainThread   | INFO  | Got logger
+2022-08-07 11:00:21,703 | MainThread   | INFO  | Got logger
+2022-08-07 11:07:17,331 | MainThread   | INFO  | Got logger
+2022-08-07 11:24:21,523 | MainThread   | INFO  | text for .info()
+2022-08-07 11:24:21,523 | MainThread   | INFO  | Got logger
+2022-08-07 11:24:28,315 | MainThread   | INFO  | text for .info()
+2022-08-07 11:24:28,315 | MainThread   | INFO  | Got logger
+2022-08-07 11:24:52,755 | MainThread   | INFO  | text for .info()
+2022-08-07 11:24:52,756 | MainThread   | INFO  | Got logger
+2022-08-07 11:25:37,912 | MainThread   | INFO  | Got logger
+2022-08-07 11:26:32,898 | MainThread   | INFO  | Got logger
+2022-08-07 11:26:49,638 | MainThread   | INFO  | Got logger
+2022-08-07 11:32:31,210 | MainThread   | INFO  | Got logger
+2022-08-07 16:37:10,915 | MainThread   | INFO  | Got logger
