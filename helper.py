@@ -23,7 +23,7 @@ def logHelper(fileName, logLevel=logging.INFO, useConsole=True):
 
 
     return log
-
+    logging.info('text for .info() doodeedoo')
 
 
     """
