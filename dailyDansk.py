@@ -2,7 +2,7 @@
 # DAILY DANISH PYTHON CODE
 
 # TODO display more than 1 pair of words
-# TODO Figure out what's not working with Crontab
+# TODO Figure out what's not working with Crontab 
 # TODO Add in the HTML MIME for part2 --> MIMEText(message, "html")
 
 import os
