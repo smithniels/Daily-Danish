@@ -19,7 +19,7 @@ import helper
 
 # Get logger
 log = helper.logHelper("logfile.log")
-log.info("Got logger")
+log.info("'logger' has been gotten")
 
 # Import CSV file
 header = []

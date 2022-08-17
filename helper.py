@@ -4,7 +4,7 @@ import sys
 import logging
 
 def logHelper(fileName, logLevel=logging.INFO, useConsole=True):
-    ##### init logging
+    ##### ifnit logging
     log = logging.getLogger()
     log.setLevel(logLevel)
     logFormatter = logging.Formatter("%(asctime)s | %(threadName)-12.12s | %(levelname)-5.5s | %(message)s")
