@@ -4,7 +4,7 @@ import sys
 import logging
 
 def logHelper(fileName, logLevel=logging.INFO, useConsole=True):
-    ##### ifnit logging
+    ##### init logging
     log = logging.getLogger()
     log.setLevel(logLevel)
     logFormatter = logging.Formatter("%(asctime)s | %(threadName)-12.12s | %(levelname)-5.5s | %(message)s")
@@ -29,7 +29,7 @@ def logHelper(fileName, logLevel=logging.INFO, useConsole=True):
     """
     Simple Logging Helper. Returns logger reference.
 
-    Paramsmeters:
+    Parameters:
     fileName: Filename, may include full path, or will open a file in default folder
     logLevel: Pass logging.INFO, logging.DEBUG or other enums for logging level
     useConsole: If True, will also dump log to console
