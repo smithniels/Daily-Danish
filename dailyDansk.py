@@ -68,9 +68,9 @@ dataB = open(
     d, "rb"
 ).read()  # read bytes(rb) from file <<<  "rb" mode opens the file in binary format for reading
 # print(dataB)
-print(type(dataB))
 data_base64 = base64.b64encode(dataB)  # encode to base64 (bytes)
-
+print(type(data_base64))
+# print(data_base64)
 data_base64 = data_base64.decode()  # convert bytes64 to string
 
 message = """From: Niels Smith
@@ -80,9 +80,11 @@ Subject: Daily Danish
 """.format(
     text
 )
+
 message = message.encode("utf-8")
 part1 = MIMEText(message, "plain", "utf-8")  # turn these into plain (TODO later add in html) MIMEText objects
 em = EmailMessage()
+# print('this is em on line 86', em)
 em.attach(part1)
 em["Subject"] = subject
 em["From"] = username
@@ -92,9 +94,13 @@ em.set_content(em)
 try:
     smtp_server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
     smtp_server.ehlo()  # Hostname to send for this command defaults to the FQDN of the local host.
-    smtp_server.login(username, password)
+    print('does line 97 get run?')
+    smtp_server.login(username, password) #  <<<<----- THIS IS THE LINE WHERE ERRORS ARE THROWN APPARENTLY. WTF DOES THAT MEAN???
+    print('does line 99 get run?')
     smtp_server.sendmail(username, username, message)
     smtp_server.close()
     print("Email sent successfully!")
 except Exception as ex:
     print("Oh dear, something went wrong...", ex)
+
+print('k last line 1 sec')

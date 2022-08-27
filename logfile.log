@@ -40,3 +40,22 @@
 2022-08-27 10:36:32,201 | MainThread   | INFO  | 'logger' has been gotten
 2022-08-27 10:36:43,801 | MainThread   | INFO  | 'logger' has been gotten
 2022-08-27 10:37:02,801 | MainThread   | INFO  | 'logger' has been gotten
+2022-08-27 10:44:01,442 | MainThread   | INFO  | Got logger
+2022-08-27 10:45:33,548 | MainThread   | INFO  | Got logger
+2022-08-27 10:46:03,488 | MainThread   | INFO  | Got logger
+2022-08-27 10:46:40,969 | MainThread   | INFO  | Got logger
+2022-08-27 10:47:13,327 | MainThread   | INFO  | Got logger
+2022-08-27 10:48:16,557 | MainThread   | INFO  | Got logger
+2022-08-27 10:48:53,785 | MainThread   | INFO  | Got logger
+2022-08-27 10:49:47,161 | MainThread   | INFO  | Got logger
+2022-08-27 10:50:27,461 | MainThread   | INFO  | Got logger
+2022-08-27 10:52:21,298 | MainThread   | INFO  | Got logger
+2022-08-27 10:53:13,594 | MainThread   | INFO  | Got logger
+2022-08-27 10:53:31,456 | MainThread   | INFO  | Got logger
+2022-08-27 10:53:53,383 | MainThread   | INFO  | Got logger
+2022-08-27 10:54:05,991 | MainThread   | INFO  | Got logger
+2022-08-27 10:54:17,723 | MainThread   | INFO  | Got logger
+2022-08-27 10:54:41,182 | MainThread   | INFO  | Got logger
+2022-08-27 10:54:50,801 | MainThread   | INFO  | Got logger
+2022-08-27 10:55:03,154 | MainThread   | INFO  | Got logger
+2022-08-27 10:56:35,664 | MainThread   | INFO  | Got logger
