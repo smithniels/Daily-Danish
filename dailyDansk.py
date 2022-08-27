@@ -21,7 +21,7 @@ import pprint
 
 # Get logger
 log = helper.logHelper("logfile.log")
-log.info("'logger' has been gotten")
+log.info("Got logger")
 
 # Import CSV file
 header = []

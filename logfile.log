@@ -24,6 +24,7 @@
 2022-08-07 16:37:10,915 | MainThread   | INFO  | Got logger
 2022-08-07 20:14:37,713 | MainThread   | INFO  | Got logger
 2022-08-11 09:35:19,816 | MainThread   | INFO  | Got logger
+<<<<<<< HEAD
 2022-08-16 11:18:57,591 | MainThread   | INFO  | Got logger
 2022-08-16 12:28:59,608 | MainThread   | INFO  | Got logger
 2022-08-16 12:29:00,066 | MainThread   | INFO  | Got logger
@@ -40,3 +41,5 @@
 2022-08-27 10:36:32,201 | MainThread   | INFO  | 'logger' has been gotten
 2022-08-27 10:36:43,801 | MainThread   | INFO  | 'logger' has been gotten
 2022-08-27 10:37:02,801 | MainThread   | INFO  | 'logger' has been gotten
+=======
+>>>>>>> parent of c488219 (rf)
