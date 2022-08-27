@@ -16,6 +16,8 @@ from email import encoders
 from codecs import decode, encode, open
 import logging
 import helper
+import pprint
+
 
 # Get logger
 log = helper.logHelper("logfile.log")
@@ -27,7 +29,7 @@ rows = []
 with open(
     "/Users/nielssmith/Documents/GitHub/Daily-Danish/translations.csv",
     "r",
-    encoding='utf-8', # this was set to 'utf-8-sig', but I switched it to just 'utf-8', and it still works 🤷
+   encoding='utf-8', # this was 'utf-8-sig', but I switched it to just 'utf-8', and it still works /shrugemoji
 ) as file:
     csvreader = csv.reader(file)
     header = next(csvreader)  # Return the next item from the iterator.
@@ -65,7 +67,10 @@ d = choice(files)
 dataB = open(
     d, "rb"
 ).read()  # read bytes(rb) from file <<<  "rb" mode opens the file in binary format for reading
+# print(dataB)
+print(type(dataB))
 data_base64 = base64.b64encode(dataB)  # encode to base64 (bytes)
+
 data_base64 = data_base64.decode()  # convert bytes64 to string
 
 message = """From: Niels Smith
