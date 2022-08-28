@@ -51,6 +51,7 @@ with open(
 # Email Set Up from local environment
 username = os.environ.get("userUSERuser")
 password = os.environ.get("PASS")
+print(username,'LOREM IPSUM FUCK YOU',password)
 
 # Message set up
 msg = "Hey, are you reading this message? y/n"
@@ -69,7 +70,7 @@ dataB = open(
 ).read()  # read bytes(rb) from file <<<  "rb" mode opens the file in binary format for reading
 # print(dataB)
 data_base64 = base64.b64encode(dataB)  # encode to base64 (bytes)
-print(type(data_base64))
+# print(type(data_base64))
 # print(data_base64)
 data_base64 = data_base64.decode()  # convert bytes64 to string
 
@@ -90,6 +91,7 @@ em["Subject"] = subject
 em["From"] = username
 em["To"] = username
 em.set_content(em)
+
 
 try:
     smtp_server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
