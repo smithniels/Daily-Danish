@@ -2,7 +2,7 @@
 # DAILY DANISH PYTHON CODE
 
 # TODO display more than 1 pair of words
-# TODO Figure out what's not working with Crontab 
+# TODO Figure out what's not working with Crontab
 # TODO Add in the HTML MIME for part2 --> MIMEText(message, "html")
 
 import os
@@ -16,8 +16,6 @@ from email import encoders
 from codecs import decode, encode, open
 import logging
 import helper
-import pprint
-
 
 # Get logger
 log = helper.logHelper("logfile.log")
@@ -49,8 +47,8 @@ with open(
         print(row)
 
 # Email Set Up from local environment
-username = os.environ.get("userUSERuser")
-password = os.environ.get("PASS")
+username = os.environ.get("userUSERuser",'default username')
+password = os.environ.get("PASS",'default password')
 print(username,'LOREM IPSUM FUCK YOU',password)
 
 # Message set up
@@ -104,5 +102,7 @@ try:
     print("Email sent successfully!")
 except Exception as ex:
     print("Oh dear, something went wrong...", ex)
+    # print(os.environ)
+    
 
 print('k last line 1 sec')
