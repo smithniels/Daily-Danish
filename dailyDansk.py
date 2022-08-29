@@ -1,8 +1,9 @@
 
 # DAILY DANISH PYTHON CODE
 
-# TODO display more than 1 pair of words
 # TODO Figure out what's not working with Crontab
+# TODO Figure out what's not working with the environmental variables
+# TODO display more than 1 pair of words
 # TODO Add in the HTML MIME for part2 --> MIMEText(message, "html")
 
 import os
@@ -40,16 +41,17 @@ with open(
     wordC = ( # Transforms to type: bytes to string
         wordB.decode() 
     )
-    # Why exactly is all of that necessary?
+    # Why exactly is all of that necessary? ...THE BYTES!
     text = "\n {} \n ".format(wordC)
     for row in csvreader: 
         rows.append(row)
         print(row)
+# print(os.environ['PASS'])
 
 # Email Set Up from local environment
-username = os.environ.get("userUSERuser",'default username')
-password = os.environ.get("PASS",'default password')
-print(username,'LOREM IPSUM FUCK YOU',password)
+username = os.environ.get("userUSERuser")
+password = os.environ.get("PASS")
+print(username,' LOREM IPSUM FUCK YOU ',password)
 
 # Message set up
 msg = "Hey, are you reading this message? y/n"
@@ -103,6 +105,3 @@ try:
 except Exception as ex:
     print("Oh dear, something went wrong...", ex)
     # print(os.environ)
-    
-
-print('k last line 1 sec')
