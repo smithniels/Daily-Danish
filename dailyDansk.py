@@ -1,4 +1,4 @@
-#!/Users/nielssmith/opt/anaconda3/bin python3
+#!python /Users/nielssmith/Documents/GitHub/Daily-Danish/dailyDansk.py
 
 # DAILY DANISH PYTHON CODE
 
@@ -56,7 +56,7 @@ with open(
         print(row)
 
 # Email Set Up from local environment
-key='userUSERuser' # There's not really a point to setting this as a var. it just breaks up the procedure a bit... /shrugs
+key='userUSERuser' # There's not really a point to setting this as a var. it just breaks up the procedure a bit... /big_shrugs
 username = os.environ.get(key)
 print('username isn\'t working. Look:',username) # return 'none', which isn't the coolest thing right now...
 password = os.environ.get("PASS")
@@ -113,4 +113,9 @@ try:
     print("Email sent successfully!")
 except Exception as ex:
     print("Oh dear, something went wrong...", ex)
-    # print(os.environ)
+
+#  TEST AREA (feel free to destroy)
+user = os.environ['USER']
+print(user)
+print(username) #None
+user

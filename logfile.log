@@ -131,3 +131,9 @@
 2022-08-30 15:39:12,232 | MainThread   | INFO  | Got logger
 2022-08-31 11:04:39,284 | MainThread   | INFO  | Got logger
 Setting marker here ( checking if chrontab is running )
+2022-09-03 10:50:22,138 | MainThread   | INFO  | Got logger
+2022-09-03 10:54:05,352 | MainThread   | INFO  | Got logger
+2022-09-03 10:55:44,883 | MainThread   | INFO  | Got logger
+2022-09-03 11:02:07,409 | MainThread   | INFO  | Got logger
+2022-09-03 11:02:18,590 | MainThread   | INFO  | Got logger
+2022-09-03 11:02:27,335 | MainThread   | INFO  | Got logger
