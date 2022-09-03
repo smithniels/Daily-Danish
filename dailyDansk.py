@@ -1,8 +1,9 @@
+#!/Users/nielssmith/opt/anaconda3/bin python3
 
 # DAILY DANISH PYTHON CODE
 
-# TODO Figure out what's not working with Crontab
 # TODO Figure out what's not working with the environmental variables
+# TODO Figure out what's not working with Crontab
 # TODO display more than 1 pair of words
 # TODO Add in the HTML MIME for part2 --> MIMEText(message, "html")
 
@@ -17,6 +18,13 @@ from email import encoders
 from codecs import decode, encode, open
 import logging
 import helper
+
+
+dir_path = os.path.dirname(os.path.realpath(__file__))
+print(dir_path)
+filename = os.path.join(dir_path, 'logfile.log')
+print(filename)
+
 
 # Get logger
 log = helper.logHelper("logfile.log")
@@ -46,12 +54,13 @@ with open(
     for row in csvreader: 
         rows.append(row)
         print(row)
-# print(os.environ['PASS'])
 
 # Email Set Up from local environment
-username = os.environ.get("userUSERuser")
+key='userUSERuser' # There's not really a point to setting this as a var. it just breaks up the procedure a bit... /shrugs
+username = os.environ.get(key)
+print('username isn\'t working. Look:',username) # return 'none', which isn't the coolest thing right now...
 password = os.environ.get("PASS")
-print(username,' LOREM IPSUM FUCK YOU ',password)
+print(username,' FUCK YOU LOREM IPSUM FUCK YOU ',password) # 'none' & 'none'  ._.
 
 # Message set up
 msg = "Hey, are you reading this message? y/n"
@@ -59,11 +68,11 @@ email_sender = username
 email_password = password
 email_receiver = username
 subject = """ 
-"""  # THERE MUST BE AN SUBJECT. EVEN AN EMPTY ONE! 🤷
+"""  # THERE MUST BE A SUBJECT. EVEN AN EMPTY ONE! 🤷
 path = "/Users/nielssmith/Documents/GitHub/Daily-Danish"
 files = [
     i for i in os.listdir() if os.path.isfile(i)
-]  # I def can't explain fully how this one liner works...
+]  # I def can't explain fully how this one liner works... #TODO how does it work?
 d = choice(files)
 dataB = open(
     d, "rb"
@@ -97,8 +106,8 @@ try:
     smtp_server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
     smtp_server.ehlo()  # Hostname to send for this command defaults to the FQDN of the local host.
     print('does line 97 get run?')
-    smtp_server.login(username, password) #  <<<<----- THIS IS THE LINE WHERE ERRORS ARE THROWN APPARENTLY. WTF DOES THAT MEAN???
-    print('does line 99 get run?')
+    smtp_server.login(username, password) #  <<<<----- THIS IS THE LINE WHERE ERRORS ARE THROWN APPARENTLY. There's probably an issue with the env variables...?
+    print('does line 99 get run?') # no
     smtp_server.sendmail(username, username, message)
     smtp_server.close()
     print("Email sent successfully!")

@@ -23,7 +23,6 @@
 2022-08-07 11:32:31,210 | MainThread   | INFO  | Got logger
 2022-08-07 16:37:10,915 | MainThread   | INFO  | Got logger
 2022-08-07 20:14:37,713 | MainThread   | INFO  | Got logger
-<<<<<<< HEAD
 2022-08-11 09:35:19,816 | MainThread   | INFO  | Got logger
 2022-08-16 11:18:57,591 | MainThread   | INFO  | Got logger
 2022-08-16 12:28:59,608 | MainThread   | INFO  | Got logger
@@ -62,7 +61,6 @@
 2022-08-27 10:56:35,664 | MainThread   | INFO  | Got logger
 2022-08-28 08:24:11,293 | MainThread   | INFO  | Got logger
 2022-08-28 08:24:35,735 | MainThread   | INFO  | Got logger
-text
 2022-08-28 08:30:33,125 | MainThread   | INFO  | Got logger
 2022-08-28 08:30:54,976 | MainThread   | INFO  | Got logger
 2022-08-28 08:32:48,842 | MainThread   | INFO  | Got logger
@@ -111,3 +109,25 @@ text
 2022-08-28 17:00:40,999 | MainThread   | INFO  | Got logger
 2022-08-29 09:28:43,801 | MainThread   | INFO  | Got logger
 2022-08-29 09:28:58,829 | MainThread   | INFO  | Got logger
+2022-08-29 10:34:32,171 | MainThread   | INFO  | Got logger
+2022-08-29 10:34:39,620 | MainThread   | INFO  | Got logger
+2022-08-29 10:35:59,349 | MainThread   | INFO  | Got logger
+2022-08-30 10:01:19,270 | MainThread   | INFO  | Got logger
+2022-08-30 10:01:46,042 | MainThread   | INFO  | Got logger
+2022-08-30 10:52:40,331 | MainThread   | INFO  | Got logger
+2022-08-30 10:55:25,985 | MainThread   | INFO  | Got logger
+2022-08-30 10:57:08,611 | MainThread   | INFO  | Got logger
+2022-08-30 10:57:25,293 | MainThread   | INFO  | Got logger
+2022-08-30 11:07:28,911 | MainThread   | INFO  | Got logger
+2022-08-30 11:07:31,340 | MainThread   | INFO  | Got logger
+2022-08-30 11:07:37,309 | MainThread   | INFO  | Got logger
+2022-08-30 11:07:54,116 | MainThread   | INFO  | Got logger
+2022-08-30 11:08:00,234 | MainThread   | INFO  | Got logger
+2022-08-30 11:09:13,000 | MainThread   | INFO  | Got logger
+2022-08-30 11:09:17,437 | MainThread   | INFO  | Got logger
+2022-08-30 14:39:59,474 | MainThread   | INFO  | Got logger
+2022-08-30 14:47:19,619 | MainThread   | INFO  | Got logger
+2022-08-30 14:47:50,149 | MainThread   | INFO  | Got logger
+2022-08-30 15:39:12,232 | MainThread   | INFO  | Got logger
+2022-08-31 11:04:39,284 | MainThread   | INFO  | Got logger
+Setting marker here ( checking if chrontab is running )
