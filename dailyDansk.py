@@ -58,9 +58,7 @@ with open(
 # Email Set Up from local environment
 key='userUSERuser' # There's not really a point to setting this as a var. it just breaks up the procedure a bit... /big_shrugs
 username = os.environ.get(key)
-print('username isn\'t working. Look:',username) # return 'none', which isn't the coolest thing right now...
 password = os.environ.get("PASS")
-print(username,' FUCK YOU LOREM IPSUM FUCK YOU ',password) # 'none' & 'none'  ._.
 
 # Message set up
 msg = "Hey, are you reading this message? y/n"
@@ -105,17 +103,15 @@ em.set_content(em)
 try:
     smtp_server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
     smtp_server.ehlo()  # Hostname to send for this command defaults to the FQDN of the local host.
-    print('does line 97 get run?')
     smtp_server.login(username, password) #  <<<<----- THIS IS THE LINE WHERE ERRORS ARE THROWN APPARENTLY. There's probably an issue with the env variables...?
-    print('does line 99 get run?') # no
     smtp_server.sendmail(username, username, message)
     smtp_server.close()
     print("Email sent successfully!")
 except Exception as ex:
     print("Oh dear, something went wrong...", ex)
 
-#  TEST AREA (feel free to destroy)
-user = os.environ['USER']
-print(user)
-print(username) #None
-user
+# #  TEST AREA (feel free to destroy)
+# user = os.environ['USER']
+# print(user)
+# print(username) #None
+# user
