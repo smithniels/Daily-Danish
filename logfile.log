@@ -137,3 +137,17 @@ Setting marker here ( checking if chrontab is running )
 2022-09-03 11:02:07,409 | MainThread   | INFO  | Got logger
 2022-09-03 11:02:18,590 | MainThread   | INFO  | Got logger
 2022-09-03 11:02:27,335 | MainThread   | INFO  | Got logger
+Things are working when run from terminal. Further investigation required!  
+2022-09-03 12:12:08,714 | MainThread   | INFO  | Got logger
+2022-09-03 12:12:33,149 | MainThread   | INFO  | Got logger
+2022-09-04 09:51:22,655 | MainThread   | INFO  | Got logger
+2022-09-04 09:52:25,229 | MainThread   | INFO  | Got logger
+2022-09-04 09:52:32,651 | MainThread   | INFO  | Got logger
+2022-09-04 09:56:31,369 | MainThread   | INFO  | Got logger
+2022-09-04 10:00:17,505 | MainThread   | INFO  | Got logger
+2022-09-04 10:00:48,371 | MainThread   | INFO  | Got logger
+2022-09-04 10:01:13,434 | MainThread   | INFO  | Got logger
+2022-09-04 10:02:13,056 | MainThread   | INFO  | Got logger
+2022-09-04 10:03:04,602 | MainThread   | INFO  | Got logger
+2022-09-04 10:38:13,795 | MainThread   | INFO  | Got logger
+2022-09-04 13:12:27,235 | MainThread   | INFO  | Got logger

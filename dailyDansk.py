@@ -1,4 +1,7 @@
-#!python /Users/nielssmith/Documents/GitHub/Daily-Danish/dailyDansk.py
+#!/usr/bin/python3
+
+print('HEY, UPLOAD THE NEW SCREENSHOTS INTO THE TRANSLATIONS.CSV!')
+print('HEY, UPLOAD THE NEW SCREENSHOTS INTO THE TRANSLATIONS.CSV!')
 
 # DAILY DANISH PYTHON CODE
 
@@ -8,6 +11,7 @@
 # TODO Add in the HTML MIME for part2 --> MIMEText(message, "html")
 
 import os
+import sys
 import csv
 import smtplib
 import base64
@@ -18,13 +22,6 @@ from email import encoders
 from codecs import decode, encode, open
 import logging
 import helper
-
-
-dir_path = os.path.dirname(os.path.realpath(__file__))
-print(dir_path)
-filename = os.path.join(dir_path, 'logfile.log')
-print(filename)
-
 
 # Get logger
 log = helper.logHelper("logfile.log")
@@ -56,9 +53,10 @@ with open(
         print(row)
 
 # Email Set Up from local environment
-key='userUSERuser' # There's not really a point to setting this as a var. it just breaks up the procedure a bit... /big_shrugs
+key='userUSERuser' # There's not really a point to setting these two to be variables. it just breaks up the procedure a bit...for no reason /big_shrugs #BadCoder
+pwkey="PASS"
 username = os.environ.get(key)
-password = os.environ.get("PASS")
+password = os.environ.get(pwkey)
 
 # Message set up
 msg = "Hey, are you reading this message? y/n"
@@ -110,8 +108,3 @@ try:
 except Exception as ex:
     print("Oh dear, something went wrong...", ex)
 
-# #  TEST AREA (feel free to destroy)
-# user = os.environ['USER']
-# print(user)
-# print(username) #None
-# user
