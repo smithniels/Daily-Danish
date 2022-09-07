@@ -33,7 +33,7 @@ rows = []
 with open(
     "/Users/nielssmith/Documents/GitHub/Daily-Danish/translations.csv",
     "r",
-   encoding='utf-8', # this was 'utf-8-sig', but I switched it to just 'utf-8', and it still works /shrugemoji
+    encoding='utf-8' # this was 'utf-8-sig', but I switched it to just 'utf-8', and it still works /shrugemoji
 ) as file:
     csvreader = csv.reader(file)
     header = next(csvreader)  # Return the next item from the iterator.
@@ -55,16 +55,22 @@ with open(
 # Email Set Up from local environment
 key='userUSERuser' # There's not really a point to setting these two to be variables. it just breaks up the procedure a bit...for no reason /big_shrugs #BadCoder
 pwkey="PASS"
-username = os.environ.get(key)
-password = os.environ.get(pwkey)
+
+# username = os.environ.get(key)
+# password = os.environ.get(pwkey)
+
+username = 'smithniels@gmail.com'
+
+# print(username,0)
+# print(username,1) 
 
 # Message set up
 msg = "Hey, are you reading this message? y/n"
 email_sender = username
 email_password = password
-email_receiver = username
+email_receiver = username 
 subject = """ 
-"""  # THERE MUST BE A SUBJECT. EVEN AN EMPTY ONE! 🤷
+"""  # THERE MUST BE A SUBJECT. EVEN AN EMPTY ONE! 
 path = "/Users/nielssmith/Documents/GitHub/Daily-Danish"
 files = [
     i for i in os.listdir() if os.path.isfile(i)
