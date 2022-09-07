@@ -56,13 +56,21 @@ with open(
 key='userUSERuser' # There's not really a point to setting these two to be variables. it just breaks up the procedure a bit...for no reason /big_shrugs #BadCoder
 pwkey="PASS"
 
-# username = os.environ.get(key)
-# password = os.environ.get(pwkey)
 
-username = 'smithniels@gmail.com'
+username = os.environ.get(key)
 
-# print(username,0)
-# print(username,1) 
+
+#print everything
+for key, value in os.environ.items():
+  print('{}: {}'.format(key, value))
+
+password = os.environ.get(pwkey)
+print(username)
+print(password)
+# username = 'smithniels@gmail.com'
+# password= 'aevnhxsexkjfjydk'
+# print(username)
+# print(password )
 
 # Message set up
 msg = "Hey, are you reading this message? y/n"
