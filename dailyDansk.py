@@ -1,26 +1,24 @@
 #!/usr/bin/python3
+# scheduling with LaunchD: WATCH PLEAZE
+# https://www.youtube.com/watch?v=Z9iLNlNy0cM&ab_channel=CoreySchafer
 
-
-print('HEY, UPLOAD THE NEW SCREENSHOTS INTO THE TRANSLATIONS.CSV!')
+# print('HEY, UPLOAD THE NEW SCREENSHOTS INTO THE TRANSLATIONS.CSV!')
 
 # DAILY DANISH PYTHON CODE
 
-# TODO Figure out what's not working with the environmental variables
-# TODO Figure out what's not working with Crontab
-# TODO display more than 1 pair of words
 # TODO Add in the HTML MIME for part2 --> MIMEText(message, "html")
 
+# INSTRUCTIONS FOR EXE
+# RUN: pyinstaller --onefile dailyDansk.py IN TERMINAL
+
 import os
-import sys
 import csv
 import smtplib
 import base64
 from random import choice
 from email.message import EmailMessage
 from email.mime.text import MIMEText
-from email import encoders
-from codecs import decode, encode, open
-import logging
+from codecs import encode 
 import helper
 
 # Get logger
@@ -33,7 +31,7 @@ rows = []
 with open(
     "/Users/nielssmith/Documents/GitHub/Daily-Danish/translations.csv",
     "r",
-    encoding='utf-8' # this was 'utf-8-sig', but I switched it to just 'utf-8', and it still works /shrugemoji
+    encoding='utf-8' # this was 'utf-8-sig', but I switched it to just 'utf-8', and it still works
 ) as file:
     csvreader = csv.reader(file)
     header = next(csvreader)  # Return the next item from the iterator.
@@ -44,33 +42,18 @@ with open(
         wordA, "utf-8"
     )
     wordC = ( # Transforms to type: bytes to string
-        wordB.decode() 
+        wordB.decode()
     )
-    # Why exactly is all of that necessary? ...THE BYTES!
-    text = "\n {} \n ".format(wordC)
+    # TODO: Why exactly is all of that necessary? ...THE BYTES!
+    text = f'\n {wordC} \n'
     for row in csvreader: 
         rows.append(row)
         print(row)
-
 # Email Set Up from local environment
-key='userUSERuser' # There's not really a point to setting these two to be variables. it just breaks up the procedure a bit...for no reason /big_shrugs #BadCoder
+key='userUSERuser'
 pwkey="PASS"
-
-
 username = os.environ.get(key)
-
-
-#print everything
-for key, value in os.environ.items():
-  print('{}: {}'.format(key, value))
-
 password = os.environ.get(pwkey)
-print(username)
-print(password)
-# username = 'smithniels@gmail.com'
-# password= 'aevnhxsexkjfjydk'
-# print(username)
-# print(password )
 
 # Message set up
 msg = "Hey, are you reading this message? y/n"
@@ -88,23 +71,17 @@ dataB = open(
     d, "rb"
 ).read()  # read bytes(rb) from file <<<  "rb" mode opens the file in binary format for reading
 # print(dataB)
-data_base64 = base64.b64encode(dataB)  # encode to base64 (bytes)
-# print(type(data_base64))
-# print(data_base64)
+data_base64 = base64.b64encode(dataB) # encode to base64 (bytes)
 data_base64 = data_base64.decode()  # convert bytes64 to string
-
-message = """From: Niels Smith
+message = f"""From: Niels Smith
 To: Niels Smith
 Subject: Daily Danish
-{}
-""".format(
-    text
-)
+{text}
+"""
 
 message = message.encode("utf-8")
-part1 = MIMEText(message, "plain", "utf-8")  # turn these into plain (TODO later add in html) MIMEText objects
+part1 = MIMEText(message, "plain", "utf-8")
 em = EmailMessage()
-# print('this is em on line 86', em)
 em.attach(part1)
 em["Subject"] = subject
 em["From"] = username
@@ -115,7 +92,7 @@ em.set_content(em)
 try:
     smtp_server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
     smtp_server.ehlo()  # Hostname to send for this command defaults to the FQDN of the local host.
-    smtp_server.login(username, password) #  <<<<----- THIS IS THE LINE WHERE ERRORS ARE THROWN APPARENTLY. There's probably an issue with the env variables...?
+    smtp_server.login(username, password) 
     smtp_server.sendmail(username, username, message)
     smtp_server.close()
     print("Email sent successfully!")

@@ -1,0 +1,12 @@
+# Import os module
+import os
+
+# Set the value DEBUG variable
+os.environ.setdefault('userUSERuser', 'True')
+
+# Checking the value of the environment variable
+if os.environ.get('userUSERuser') == 'True':
+    print('Debug mode is on')
+else:
+    print('Debug mode is off')
+print('userUSERuser')
