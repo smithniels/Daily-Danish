@@ -6,8 +6,6 @@
 
 # DAILY DANISH PYTHON CODE
 
-# TODO Add in the HTML MIME for part2 --> MIMEText(message, "html")
-
 # INSTRUCTIONS FOR EXE
 # RUN: pyinstaller --onefile dailyDansk.py IN TERMINAL
 
@@ -31,24 +29,24 @@ rows = []
 with open(
     "/Users/nielssmith/Documents/GitHub/Daily-Danish/translations.csv",
     "r",
-    # this was 'utf-8-sig', but I switched it to just 'utf-8', and it still works
     encoding='utf-8'
 ) as file:
     csvreader = csv.reader(file)
     header = next(csvreader)  # Return the next item from the iterator.
     words = list(csvreader)
     word1 = choice(words)  # choose a random element (type: list)
-    wordA = " : ".join(word1)  # Type: String
-    wordB = encode(  # Transforms to type: string to bytes
+    wordA = " : ".join(word1)
+    wordB = encode(
         wordA, "utf-8"
     )
-    wordC = (  # Transforms to type: bytes to string
+    wordC = (
         wordB.decode()
     )
     text = f'\n {wordC} \n'
     for row in csvreader:
         rows.append(row)
         print(row)
+
 # Email Set Up from local environment
 key = 'userUSERuser'
 pwkey = "PASS"
@@ -96,5 +94,5 @@ try:
     smtp_server.sendmail(username, username, message)
     smtp_server.close()
     print("Email sent successfully!")
-except Exception as ex:
-    print("Oh dear, something went wrong...", ex)
+except Exception as EX:
+    print("Oh dear, something went wrong...", EX)

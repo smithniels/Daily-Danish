@@ -249,3 +249,5 @@ Things are working when run from terminal. Further investigation required!
 2022-09-16 11:37:32,310 | MainThread   | INFO  | Got logger
 2022-09-16 11:38:33,096 | MainThread   | INFO  | Got logger
 2022-09-16 11:46:09,053 | MainThread   | INFO  | Got logger
+2022-09-16 11:53:10,088 | MainThread   | INFO  | Got logger
+2022-09-16 11:53:26,499 | MainThread   | INFO  | Got logger
