@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 # scheduling with LaunchD: WATCH PLEAZE
 # https://www.youtube.com/watch?v=Z9iLNlNy0cM&ab_channel=CoreySchafer
 
@@ -94,5 +93,6 @@ try:
     smtp_server.sendmail(username, username, message)
     smtp_server.close()
     print("Email sent successfully!")
+# noinspection PyBroadException
 except Exception as EX:
     print("Oh dear, something went wrong...", EX)
