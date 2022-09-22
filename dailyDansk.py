@@ -1,12 +1,10 @@
-# scheduling with LaunchD: WATCH PLEAZE
-# https://www.youtube.com/watch?v=Z9iLNlNy0cM&ab_channel=CoreySchafer
-
-# print('HEY, UPLOAD THE NEW SCREENSHOTS INTO THE TRANSLATIONS.CSV!')
-
 # DAILY DANISH PYTHON CODE
 
-# INSTRUCTIONS FOR EXE
-# RUN: pyinstaller --onefile dailyDansk.py IN TERMINAL
+
+# TODO: Watch scheduling with LaunchD: WATCH PLEAZE
+
+# How to create exe file from py
+#  pyinstaller --onefile dailyDansk.py IN TERMINAL
 
 import os
 import csv
@@ -53,16 +51,15 @@ username = os.environ.get(key)
 password = os.environ.get(pwkey)
 
 # Message set up
-# MSG = "Hey, are you reading this message? y/n"
 email_sender = username
 email_password = password
 email_receiver = username
 subject = """ 
-"""  # THERE MUST BE A SUBJECT. EVEN AN EMPTY ONE!
+"""  # THERE MUST BE A SUBJECT. EVEN IF IT'S AN EMPTY ONE!
 path = "/Users/nielssmith/Documents/GitHub/Daily-Danish"
 files = [
     i for i in os.listdir() if os.path.isfile(i)
-]   # I def can't explain fully how this one liner works...
+]
 d = choice(files)
 dataB = open(
     d, "rb"
@@ -75,7 +72,6 @@ To: Niels Smith
 Subject: Daily Danish
 {text}
 """
-
 message = message.encode("utf-8")
 part1 = MIMEText(message, "plain", "utf-8")
 em = EmailMessage()

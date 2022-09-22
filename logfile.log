@@ -255,3 +255,4 @@ Things are working when run from terminal. Further investigation required!
 2022-09-20 15:48:30,544 | MainThread   | INFO  | Got logger
 2022-09-20 15:50:06,449 | MainThread   | INFO  | Got logger
 2022-09-20 15:54:41,776 | MainThread   | INFO  | Got logger
+2022-09-20 17:43:30,638 | MainThread   | INFO  | Got logger
