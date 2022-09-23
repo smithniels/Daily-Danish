@@ -1,10 +1,6 @@
 # DAILY DANISH PYTHON CODE
 
-
 # TODO: Watch scheduling with LaunchD: WATCH PLEAZE
-
-# How to create exe file from py
-#  pyinstaller --onefile dailyDansk.py IN TERMINAL
 
 import os
 import csv
@@ -32,7 +28,7 @@ with open(
     header = next(csvreader)  # Return the next item from the iterator.
     words = list(csvreader)
     word1 = choice(words)  # choose a random element (type: list)
-    wordA = " : ".join(word1)
+    wordA = " ~ ".join(word1)
     wordB = encode(
         wordA, "utf-8"
     )
