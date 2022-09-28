@@ -45,6 +45,10 @@ key = 'userUSERuser'
 pwkey = "PASS"
 username = os.environ.get(key)
 password = os.environ.get(pwkey)
+print(username, "<--- This is what username returns")
+print(password, "<--- This is what password returns")
+# print(os.environ['HOME'])
+# print(os.environ)
 
 # Message set up
 email_sender = username
