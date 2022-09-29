@@ -1,3 +1,7 @@
+# WATCH THIS FOR ENV VAR SETUP
+# https://www.youtube.com/watch?v=dl_jgYr0rxU
+
+
 # DAILY DANISH PYTHON CODE
 
 # TODO: Watch scheduling with LaunchD: WATCH PLEAZE
@@ -45,10 +49,8 @@ key = 'userUSERuser'
 pwkey = "PASS"
 username = os.environ.get(key)
 password = os.environ.get(pwkey)
-print(username, "<--- This is what username returns")
-print(password, "<--- This is what password returns")
-# print(os.environ['HOME'])
-# print(os.environ)
+# print(username, "<--- This is what username returns")
+# print(password, "<--- This is what password returns")
 
 # Message set up
 email_sender = username
