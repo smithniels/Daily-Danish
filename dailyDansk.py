@@ -1,7 +1,3 @@
-# WATCH THIS FOR ENV VAR SETUP
-# https://www.youtube.com/watch?v=dl_jgYr0rxU
-
-
 # DAILY DANISH PYTHON CODE
 
 # TODO: Watch scheduling with LaunchD: WATCH PLEAZE
