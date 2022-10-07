@@ -303,3 +303,6 @@ Things are working when run from terminal. Further investigation required!
 2022-09-29 16:14:33,722 | MainThread   | INFO  | Got logger
 2022-09-29 16:15:29,737 | MainThread   | INFO  | Got logger
 2022-09-29 16:16:13,233 | MainThread   | INFO  | Got logger
+2022-09-30 09:21:28,840 | MainThread   | INFO  | Got logger
+2022-10-01 10:56:28,242 | MainThread   | INFO  | Got logger
+2022-10-01 12:15:52,913 | MainThread   | INFO  | Got logger
