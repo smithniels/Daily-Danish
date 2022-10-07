@@ -1,7 +1,5 @@
 # DAILY DANISH PYTHON CODE
 
-# TODO: Watch scheduling with LaunchD: WATCH PLEAZE
-
 import os
 import csv
 import smtplib
@@ -52,7 +50,7 @@ password = os.environ.get(pwkey)
 email_sender = username
 email_password = password
 email_receiver = username
-subject = """ 
+subject = """
 """  # THERE MUST BE A SUBJECT. EVEN IF IT'S AN EMPTY ONE!
 path = "/Users/nielssmith/Documents/GitHub/Daily-Danish"
 files = [
