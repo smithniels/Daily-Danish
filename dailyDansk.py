@@ -1,3 +1,4 @@
+# pylint: disable-msg=C0103 # THIS stops the "Variable doesn't conform to blah blah blah"
 # DAILY DANISH PYTHON CODE
 
 import os

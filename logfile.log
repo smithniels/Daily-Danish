@@ -310,3 +310,12 @@ Hey this hasn't run since the first...
 2022-10-07 12:32:13,697 | MainThread   | INFO  | Got logger
 2022-10-07 12:53:45,051 | MainThread   | INFO  | Got logger
 The executable isn't updating the log file... troublesome...
+2022-10-08 02:25:11,082 | MainThread   | INFO  | Got logger
+2022-10-08 10:20:27,557 | MainThread   | INFO  | Got logger
+2022-10-08 10:28:02,459 | MainThread   | INFO  | Got logger
+2022-10-08 10:28:19,283 | MainThread   | INFO  | Got logger
+2022-10-08 10:29:42,282 | MainThread   | INFO  | Got logger
+2022-10-08 10:30:01,188 | MainThread   | INFO  | Got logger
+2022-10-08 10:55:13,994 | MainThread   | INFO  | Got logger
+text
+2022-10-10 12:45:27,381 | MainThread   | INFO  | Got logger
