@@ -31,10 +31,10 @@ with open(
     wordB = encode(
         wordA, "utf-8"
     )
-    wordC = (
+    word_decoded = (
         wordB.decode()
     )
-    text = f'\n {wordC} \n'
+    text = f'\n {word_decoded} \n'
     for row in csvreader:
         rows.append(row)
         print(row)
@@ -44,15 +44,13 @@ key = 'userUSERuser'
 pwkey = "PASS"
 username = os.environ.get(key)
 password = os.environ.get(pwkey)
-# print(username, "<--- This is what username returns")
-# print(password, "<--- This is what password returns")
 
 # Message set up
 email_sender = username
 email_password = password
 email_receiver = username
 subject = """
-"""  # THERE MUST BE A SUBJECT. EVEN IF IT'S AN EMPTY ONE!
+"""  # THERE MUST BE A SUBJECT HERE EVEN IF IT'S AN EMPTY ONE!
 path = "/Users/nielssmith/Documents/GitHub/Daily-Danish"
 files = [
     i for i in os.listdir() if os.path.isfile(i)
@@ -60,7 +58,7 @@ files = [
 d = choice(files)
 dataB = open(
     d, "rb"
-).read()  # read bytes(rb) from file <<<  "rb" mode opens the file in binary format for reading
+).read()  # read bytes(r.b.) from file <<<  "rb" mode opens the file in binary format for reading
 # print(dataB)
 data_base64 = base64.b64encode(dataB)  # encode to base64 (bytes)
 data_base64 = data_base64.decode()  # convert bytes64 to string
@@ -79,8 +77,8 @@ em["To"] = username
 em.set_content(em)
 
 try:
-    smtp_server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
     # Hostname to send for this command defaults to the FQDN of the local host.
+    smtp_server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
     smtp_server.ehlo()
     smtp_server.login(username, password)
     smtp_server.sendmail(username, username, message)

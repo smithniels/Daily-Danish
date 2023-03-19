@@ -1,0 +1,580 @@
+-- Command + 1 --> custom --> mm/dd/yyyy
+-- Command + 1 --> custom --> mm/dd/yyyy
+-- The yyyy is the important bit you'll need to change from the default Excel date format
+-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ The dates needs to be that or upload will fail
+-- Care_Program_StartDt might be a lil punk, but hopefully not!
+--share with:
+-- data@breadforthecity.org,amoore@breadforthecity.org,jgary@breadforthecity.org,mbrobbey@breadforthecity.org,namador@breadforthecity.org,sjohnson@breadforthecity.org,tknight@breadforthecity.org
+--
+DROP TABLE IF EXISTS #temptable1
+DROP TABLE IF EXISTS #temptable2
+DROP TABLE IF EXISTS #temptable3
+DROP TABLE IF EXISTS #temptable4
+DROP TABLE IF EXISTS #temptable5
+DROP TABLE IF EXISTS #temptable5a
+DROP TABLE IF EXISTS #temptable5b
+DROP TABLE IF EXISTS #temptable6
+DROP TABLE IF EXISTS #temptable6a
+DROP TABLE IF EXISTS #temptable7
+DROP TABLE IF EXISTS #temptable7a
+DROP TABLE IF EXISTS #temptable8
+DROP TABLE IF EXISTS #temptable9
+DROP TABLE IF EXISTS #temptable10
+DROP TABLE IF EXISTS #temptable11
+DROP TABLE IF EXISTS #temptable12
+DROP TABLE IF EXISTS #temptable13
+DROP TABLE IF EXISTS #temptable20
+-- Temp tables 20-25 are for zlatest assessment  (For Section 11.5)
+DROP TABLE IF EXISTS #temptable21
+DROP TABLE IF EXISTS #temptable23
+DROP TABLE IF EXISTS #temptable24
+DROP TABLE IF EXISTS #temptable25
+--1. pull all patients with active MyHealthGPS global alert
+SELECT
+    p.pid,
+    g.name AS Alert,
+    u.ufname,
+    u.ulname INTO #temptable1
+FROM
+    patients p,
+    users u,
+    globalalertdetails gd,
+    globalalerts g
+WHERE
+    p.pid = gd.patientid
+    AND p.pid = u.uid
+    AND g.id = gd.alertid
+    AND gd.alertid IN ('79', '82', '86', '87')
+    AND gd.deleteflag = 0
+    AND g.deleteflag = 0 --2. pull all patients with GPS in Pt Info
+SELECT
+    u.ulname,
+    u.ufname,
+    p.pid,
+    p.controlno,
+    CONVERT(varchar(25), sd.value) AS 'Pt_Info_GPS' INTO #temptable2
+FROM
+    users u,
+    patients p
+    LEFT JOIN structdemographics sd ON p.pid = sd.patientid
+WHERE
+    u.uid = p.pid
+    AND sd.detailid = '1835'
+    AND sd.deleteflag = 0
+    AND u.ulname NOT LIKE 'Test%'
+    AND CONVERT(varchar(25), sd.value) = 'Yes' --3. pull Consent status
+SELECT
+    p.pid,
+    p.controlno,
+    CONVERT(varchar(40), sd.value) AS 'Consent_status' INTO #temptable3
+FROM
+    patients p
+    LEFT JOIN structdemographics sd ON p.pid = sd.patientid
+WHERE
+    sd.detailid = '1836'
+    AND sd.deleteflag = 0 --4. pull Consent date
+SELECT
+    p.pid,
+    p.controlno,
+    sd.value AS 'Consent_date' INTO #temptable4
+FROM
+    patients p
+    LEFT JOIN structdemographics sd ON p.pid = sd.patientid
+WHERE
+    sd.detailid = '1837'
+    AND sd.deleteflag = 0 --5. pull withdrawn?
+SELECT
+    p.pid,
+    p.controlno,
+    sd.value AS 'Withdrawn' INTO #temptable5
+FROM
+    patients p
+    LEFT JOIN structdemographics sd ON p.pid = sd.patientid
+WHERE
+    sd.detailid = '2508'
+    AND sd.deleteflag = 0 --6. pull withdrawal date
+SELECT
+    p.pid,
+    p.controlno,
+    sd.value AS 'Withdrawal_date' INTO #temptable5a
+FROM
+    patients p
+    LEFT JOIN structdemographics sd ON p.pid = sd.patientid
+WHERE
+    sd.detailid = '2509'
+    AND sd.deleteflag = 0 --7. pull withdrawal reason
+SELECT
+    p.pid,
+    p.controlno,
+    sd.value AS 'Withdrawal_reason' INTO #temptable5b
+FROM
+    patients p
+    LEFT JOIN structdemographics sd ON p.pid = sd.patientid
+WHERE
+    sd.detailid = '2510'
+    AND sd.deleteflag = 0 --8. pull acuity level
+SELECT
+    p.pid,
+    p.controlno,
+    sd.value AS 'Acuity_level' INTO #temptable6
+FROM
+    patients p
+    LEFT JOIN structdemographics sd ON p.pid = sd.patientid
+WHERE
+    sd.detailid = '1839'
+    AND sd.deleteflag = 0
+    AND sd.value IS NOT NULL --8a. pull Capital Bikeshare status
+SELECT
+    p.pid,
+    p.controlno,
+    sd.value AS 'Capital_Bikeshare' INTO #temptable6a
+FROM
+    patients p
+    LEFT JOIN structdemographics sd ON p.pid = sd.patientid
+WHERE
+    sd.detailid = '2688'
+    AND sd.deleteflag = 0
+    AND sd.value IS NOT NULL --9. pull GPS encounter dates in which a care plan goal was specified
+SELECT
+    DISTINCT p.controlno,
+    p.pid,
+    e.date INTO #temptable7a
+FROM
+    patients p,
+    enc e
+    LEFT JOIN structhpi sh ON e.encounterid = sh.encounterid
+    LEFT JOIN structdatadetail sdd ON sh.detailid = sdd.id
+    AND sdd.deleteflag = 0
+WHERE
+    p.pid = e.patientid
+    AND e.deleteflag = 0
+    AND sh.value IS NOT NULL
+    AND sdd.catID = 404392
+    AND sdd.id IN ('1813', '1822', '1726', '1798')
+    AND e.visittype LIKE 'GPS%' --10. pull earliest date FROM above AS date care plan created
+SELECT
+    DISTINCT t7a.controlno,
+    t7a.pid,
+    CONVERT(date, t7a.date) AS date_care_plan_created INTO #temptable7
+FROM
+    #temptable7a t7a
+    INNER JOIN (
+        SELECT
+            pid,
+            min(date) AS MinDate
+        FROM
+            #temptable7a
+        GROUP BY
+            pid
+    ) groupedpid ON t7a.pid = groupedpid.pid
+    AND date = groupedpid.mindate --11. pull most recent GPS in person visit with provider name
+SELECT
+    p.pid,
+    CONVERT(date, e.date) AS date_most_rec_GPS_enc,
+    d.printname AS prov_most_rec_GPS_enc INTO #temptable8
+FROM
+    doctors d,
+    patients p,
+    enc e
+    INNER JOIN (
+        SELECT
+            patientid,
+            max(date) AS MaxDateTime
+        FROM
+            enc
+        WHERE
+            visittype LIKE 'GPS'
+            AND STATUS = 'CHK'
+            AND deleteflag = '0'
+        GROUP BY
+            patientid
+    ) groupedenc ON e.patientid = groupedenc.patientid
+    AND e.date = groupedenc.maxdatetime
+    AND e.visittype LIKE 'GPS'
+    AND e.status = 'CHK'
+    AND deleteflag = '0'
+WHERE
+    p.pid = e.patientid
+    AND d.doctorid = e.doctorid -- 11.5 Pull most recent GPS assessment 
+    -- 
+SELECT
+    p.pid,
+    p.controlno,
+    shpi.value AS New_Val,
+    shpi.valueid,
+    shpi.detailid,
+    shpi.itemid,
+    sdd.name INTO #temptable21
+FROM
+    patients p,
+    enc e,
+    structhpi shpi,
+    structdatadetail sdd
+WHERE
+    p.pid = e.patientid
+    AND e.encounterid = shpi.encounterid
+    AND e.status = 'CHK'
+    AND shpi.itemid = '19517'
+    AND sdd.itemid = shpi.itemid
+SELECT
+    p.pid,
+    p.controlno,
+    u.ufname,
+    u.ulname,
+    isNull(CONVERT(VARCHAR(20), u.dob, 103), '') dob,
+    CONVERT(date, max(e.date)) AS most_recent_old_assessment INTO #temptable20
+FROM
+    enc e,
+    patients p,
+    users u,
+    hpi hpi
+WHERE
+    e.patientid = u.uid
+    AND e.encounterid = hpi.encounterid
+    AND e.status = 'CHK'
+    AND e.deleteFlag <> 1
+    AND u.uid = p.pid
+    AND hpi.propid = 19494
+GROUP BY
+    p.pid,
+    p.controlno,
+    u.ufname,
+    u.ulname,
+    u.dob
+SELECT
+    pid,
+    date AS maxdate,
+    t.controlno INTO #temptable23
+FROM
+    (
+        SELECT
+            t21.pid,
+            t21.controlno,
+            CONVERT(varchar, t21.New_Val, 6) AS date ---* it might actually be this row
+        FROM
+            #temptable21 t21
+        UNION
+        ALL
+        SELECT
+            t20.pid,
+            t20.controlno,
+            CONVERT(varchar, t20.most_recent_old_assessment) AS date
+        FROM
+            #temptable20 t20
+    ) AS t
+SELECT
+    CONVERT(varchar, t23.maxdate, 1002) maxdate,
+    row_number() OVER (
+        PARTITION by t23.controlno
+        ORDER BY
+            CONVERT(varchar, t23.maxdate, 14)
+    ) -- This is pulling a text field AND could be the source of a future problem if the data entry is off
+    AS ID -- It will be a locked note, so you'll need a GPS person to go in AND unlock it to fix the problem
+,
+    t23.controlno,
+    t23.pid INTO #temptable24
+    -- Looking back over this a few months after I wrote it, and sorry... This is confusing... -ns
+FROM
+    #temptable23 t23
+ORDER BY
+    maxdate
+SELECT
+    t24.pid,
+    t24.maxdate INTO #temptable25
+FROM
+    #temptable24 t24
+WHERE
+    t24.ID = 1 --12. pull most recent telephone enc with provider name AND reason
+SELECT
+    p.pid,
+    CONVERT(date, e.date) AS date_most_rec_tel_enc,
+    d.printname AS prov_most_rec_tel_enc,
+    CONVERT(varchar(25), e.reason) AS tel_enc_reason INTO #temptable9
+FROM
+    doctors d,
+    patients p,
+    enc e
+    INNER JOIN (
+        SELECT
+            patientid,
+            max(date) AS MaxDateTime
+        FROM
+            enc
+        WHERE
+            visittype = 'GPS-TEL'
+            AND STATUS = 'CHK'
+            AND deleteflag = '0'
+            AND date > '2017-07-01'
+        GROUP BY
+            patientid
+    ) groupedenc ON e.patientid = groupedenc.patientid
+    AND e.date = groupedenc.maxdatetime
+    AND e.visittype IN ('GPS-TEL')
+    AND e.status = 'CHK'
+    AND deleteflag = '0'
+    AND date > '2017-07-01'
+WHERE
+    p.pid = e.patientid
+    AND d.doctorid = e.doctorid --13. pull distinct list of all patientids to be included in report
+SELECT
+    DISTINCT pid INTO #temptable10
+FROM
+    #temptable1
+UNION
+SELECT
+    DISTINCT pid
+FROM
+    #temptable2
+UNION
+SELECT
+    DISTINCT pid
+FROM
+    #temptable3
+UNION
+SELECT
+    DISTINCT pid
+FROM
+    #temptable4
+UNION
+SELECT
+    DISTINCT pid
+FROM
+    #temptable5
+UNION
+SELECT
+    DISTINCT pid
+FROM
+    #temptable5a
+UNION
+SELECT
+    DISTINCT pid
+FROM
+    #temptable5b
+UNION
+SELECT
+    DISTINCT pid
+FROM
+    #temptable6
+UNION
+SELECT
+    DISTINCT pid
+FROM
+    #temptable7
+UNION
+SELECT
+    DISTINCT pid
+FROM
+    #temptable8
+UNION
+SELECT
+    DISTINCT pid
+FROM
+    #temptable9
+UNION
+SELECT
+    DISTINCT pid
+FROM
+    #temptable25
+ORDER BY
+    pid --14. SELECT most recent GPS enc of any type (tel or in-person)
+SELECT
+    DISTINCT t10.pid,
+    --WHEN there is GPS enc date but no GPS tel enc date, use GPS enc date
+    CASE
+        WHEN (
+            t8.date_most_rec_GPS_enc IS NOT NULL
+            AND t9.date_most_rec_tel_enc IS NULL
+        ) THEN t8.date_most_rec_GPS_enc --WHEN there is a GPS tel enc date but not GPS enc date, use GPS tel enc date
+        WHEN (
+            t9.date_most_rec_tel_enc IS NOT NULL
+            AND t8.date_most_rec_GPS_enc IS NULL
+        ) THEN t9.date_most_rec_tel_enc --WHEN there is both a GPS AND GPS tel enc date AND GPS enc date is more recent, use GPS enc date
+        WHEN (
+            t8.date_most_rec_GPS_enc IS NOT NULL
+            AND t9.date_most_rec_tel_enc IS NOT NULL
+            AND t8.date_most_rec_GPS_enc > t9.date_most_rec_tel_enc
+        ) THEN t8.date_most_rec_GPS_enc --WHEN there is both a GPS AND GPS tel enc date AND GPS tel enc date is more recent, use GPS tel enc date
+        WHEN (
+            t8.date_most_rec_GPS_enc IS NOT NULL
+            AND t9.date_most_rec_tel_enc IS NOT NULL
+            AND t9.date_most_rec_tel_enc > t8.date_most_rec_GPS_enc
+        ) THEN t9.date_most_rec_tel_enc --WHEN there is both a GPS AND GPS tel enc date AND dates are same, use GPS enc date
+        WHEN (
+            t8.date_most_rec_GPS_enc IS NOT NULL
+            AND t9.date_most_rec_tel_enc IS NOT NULL
+            AND t9.date_most_rec_tel_enc = t8.date_most_rec_GPS_enc
+        ) THEN t8.date_most_rec_GPS_enc
+        ELSE NULL
+    END AS 'date_most_rec_GPS_contact',
+    --WHEN there is GPS enc date but no GPS tel enc date, use in person
+    CASE
+        WHEN (
+            t8.date_most_rec_GPS_enc IS NOT NULL
+            AND t9.date_most_rec_tel_enc IS NULL
+        ) THEN 'in person' --WHEN there is a GPS tel enc date but not GPS enc date, use tel
+        WHEN (
+            t9.date_most_rec_tel_enc IS NOT NULL
+            AND t8.date_most_rec_GPS_enc IS NULL
+        ) THEN 'tel' --WHEN there is both a GPS AND GPS tel enc date AND GPS enc date is more recent, use in person
+        WHEN (
+            t8.date_most_rec_GPS_enc IS NOT NULL
+            AND t9.date_most_rec_tel_enc IS NOT NULL
+            AND t8.date_most_rec_GPS_enc > t9.date_most_rec_tel_enc
+        ) THEN 'in person' --WHEN there is both a GPS AND GPS tel enc date AND GPS tel enc date is more recent, use tel
+        WHEN (
+            t8.date_most_rec_GPS_enc IS NOT NULL
+            AND t9.date_most_rec_tel_enc IS NOT NULL
+            AND t9.date_most_rec_tel_enc > t8.date_most_rec_GPS_enc
+        ) THEN 'tel' --WHEN there is both a GPS AND GPS tel enc date AND dates are same, use in person
+        WHEN (
+            t8.date_most_rec_GPS_enc IS NOT NULL
+            AND t9.date_most_rec_tel_enc IS NOT NULL
+            AND t9.date_most_rec_tel_enc = t8.date_most_rec_GPS_enc
+        ) THEN 'in person'
+        ELSE NULL
+    END AS 'type_most_rec_GPS_contact' INTO #temptable11
+FROM
+    #temptable10 t10
+    LEFT JOIN #temptable8 t8 on t10.pid=t8.pid
+    LEFT JOIN #temptable9 t9 on t10.pid=t9.pid
+SELECT
+    p.controlno,
+    substring(p.notes, charindex('70', p.notes), 8) AS med_id,
+    u.ufname,
+    u.ulname,
+    u.dob,
+    u.upphone,
+    u.umobileno,
+    CASE
+        WHEN CONVERT(date, p.webenableddate) = '1901-01-01' THEN 'not on portal'
+        ELSE 'on portal'
+    END AS portal,
+    CASE
+        WHEN (
+            t1.alert IS NOT NULL
+            AND (
+                t3.consent_status IS NULL
+                OR t3.consent_status = 'Consented AND enrolled'
+            )
+            AND (
+                t5.Withdrawn LIKE 'No'
+                OR t5.Withdrawn IS NULL
+            )
+        ) THEN 'Current GPS beneficiary'
+        ELSE 'Not GPS beneficiary'
+    END AS GPS_Status,
+    t1.alert,
+    t2.Pt_Info_GPS,
+    t3.Consent_status,
+    t4.Consent_date,
+    t5.Withdrawn,
+    t5a.Withdrawal_date,
+    t5b.Withdrawal_reason,
+    t6.Acuity_level,
+    t6a.Capital_Bikeshare,
+    t7.Date_care_plan_created,
+    t8.date_most_rec_GPS_enc,
+    t8.prov_most_rec_GPS_enc,
+    t9.date_most_rec_tel_enc,
+    t9.prov_most_rec_tel_enc,
+    t9.tel_enc_reason,
+    t11.date_most_rec_GPS_contact,
+    t11.type_most_rec_GPS_contact,
+    datediff(DAY, t11.date_most_rec_GPS_contact, getdate()) AS days_since_GPS_contact,
+    LEFT(CONVERT(datetime, t25.maxdate, 101), 11) AS Lastest_Assessment --<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Why won't this format to yyyy-mm-dd :(
+    INTO #temptable12
+FROM
+    users u,
+    patients p,
+    #temptable10 t10
+    LEFT JOIN #temptable1  t1 on t10.pid=t1.pid
+    LEFT JOIN #temptable2  t2 on t10.pid=t2.pid
+    LEFT JOIN #temptable3  t3 on t10.pid=t3.pid
+    LEFT JOIN #temptable4  t4 on t10.pid=t4.pid
+    LEFT JOIN #temptable5  t5 on t10.pid=t5.pid
+    LEFT JOIN #temptable5a t5a on t10.pid=t5a.pid
+    LEFT JOIN #temptable5b t5b on t10.pid=t5b.pid
+    LEFT JOIN #temptable6  t6 on t10.pid=t6.pid
+    LEFT JOIN #temptable6a t6a on t10.pid=t6a.pid
+    LEFT JOIN #temptable7  t7 on t10.pid=t7.pid
+    LEFT JOIN #temptable8  t8 on t10.pid=t8.pid
+    LEFT JOIN #temptable9  t9 on t10.pid=t9.pid
+    LEFT JOIN #temptable11 t11 on t10.pid=t11.pid
+    LEFT JOIN #temptable25 t25 on t10.pid= t25.pid
+WHERE
+    t10.pid = p.pid
+    AND p.pid = u.uid
+    AND u.ulname <> 'Test'
+    AND u.ulname <> 'Testing'
+ORDER BY
+    t1.alert DESC,
+    t2.Pt_Info_GPS DESC,
+    t3.consent_status --14. GPS Beneficiaries
+    --SELECT 'Current GPS Beneficiaries' AS 'Current GPS Beneficiaries'
+SELECT
+    d.printname AS PCP,
+    t12.* INTO #temptable13
+FROM
+    #temptable12 t12, patients p
+    LEFT JOIN doctors d ON p.doctorid = d.doctorid
+WHERE
+    t12.controlno = p.controlno
+    AND GPS_Status = 'Current GPS beneficiary'
+ORDER BY
+    t12.ufname --Address_1	Address_2	City	State	Zip	Birtdate	Gender	SSN for the ENC Patient Panel Report
+SELECT
+    'ENS_Patient_Portal_Columns' AS 'ENS_Patient_Portal_Columns'
+SELECT
+    'Bread for the City' AS 'Group',
+    '' AS 'Member_Status',
+    t13.med_id AS 'Patient_ID',
+    u.ufname AS 'First_Name',
+    '' AS 'Middle_Name',
+    u.ulname AS 'Last_Name',
+    '' AS 'Name_Suffix',
+    u.upaddress AS 'Address_1',
+    u.upaddress2 AS 'Address_2',
+    UPPER(CAST(u.upcity AS nchar(1))) + LOWER(STUFF(CAST(u.upcity AS nvarchar(max)), 1, 1, '')) AS 'City',
+    u.upstate 'State',
+    u.zipcode 'Zip',
+    -- ISSUE: the dob's aren't converting to day/month/year format. Why? No idea. Atleast no good idea
+    --isNull(convert(VARCHAR(20),t13.date_care_plan_created,103),'') as 'Care_Program_StartDt',
+    isNull(CONVERT(VARCHAR(20), u.dob), '') AS 'Birthdate',
+    UPPER(CAST(u.sex AS nchar(1))) + LOWER(STUFF(CAST(u.sex AS nvarchar(max)), 1, 1, '')) AS 'Gender',
+    u.ssn AS 'SSN',
+    t13.upPhone AS 'Home_Phone',
+    '' AS 'Work_Phone',
+    t13.umobileno 'Cell_Phone',
+    '' AS 'Practice',
+    '' AS 'Location',
+    '' AS 'PCP',
+    '' AS 'NPI',
+    '' AS 'TaxID',
+    '' AS 'Insurance',
+    '' AS 'ACO',
+    '' AS 'Account_Number',
+    '' AS 'ENS_Startdate',
+    '' AS 'Care_Program',
+    t13.date_care_plan_created AS 'Care_Program_StartDt',
+    '' AS 'Care_Program_EndDt',
+    'Ashley Moore' AS 'Care_Manager',
+    '202-386-7605' AS 'Care_Manager_Phone',
+    'amoore@breadforthecity.org' AS 'Care_Manager_Email',
+    '' AS 'RiskScore1',
+    '' AS 'RiskMethodology1',
+    '' AS 'RiskScore2',
+    '' AS 'RiskMethodology2',
+    '' AS 'Region',
+    '' AS 'DirectEmail',
+    '' AS 'DocHaloID',
+    '' AS 'Follow Up Date',
+    '' AS 'Appointment Missed Date',
+    '' AS 'Care_Alert',
+    '' AS 'Assigning_Authority_Code'
+FROM
+    #temptable13 t13
+    LEFT JOIN patients p ON t13.controlno = p.controlno
+    LEFT JOIN users u ON p.pid = u.uid
+WHERE
+    t13.Consent_status = 'Consented and enrolled'
+    AND t13.withdrawal_date IS NULL
