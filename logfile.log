@@ -319,3 +319,5 @@ The executable isn't updating the log file... troublesome...
 2022-10-08 10:55:13,994 | MainThread   | INFO  | Got logger
 text
 2022-10-10 12:45:27,381 | MainThread   | INFO  | Got logger
+2023-03-20 17:23:32,115 | MainThread   | INFO  | Got logger
+2023-03-20 17:23:58,870 | MainThread   | INFO  | Got logger
