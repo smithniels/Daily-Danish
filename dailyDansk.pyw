@@ -1,4 +1,3 @@
-# pylint: disable-msg=C0103 # THIS stops the "Variable doesn't conform to blah blah blah"
 # DAILY DANISH PYTHON CODE
 
 #  TODO  add to each row in the CSV so it has:
@@ -11,10 +10,10 @@ from random import choice
 import csv
 from codecs import encode
 from email.message import EmailMessage
-import helper
 from email.mime.text import MIMEText
 import smtplib
 import os
+import helper
 
 # Get logger
 log = helper.logHelper("logfile.log")
@@ -66,6 +65,7 @@ dataB = open(
 ).read()  # read bytes(r.b.) from file <<<  "rb" mode opens the file in binary format for reading
 data_base64 = base64.b64encode(dataB)  # encode to base64 (bytes)
 data_base64 = data_base64.decode()  # convert bytes64 to string
+# f-strings "Formatted string literals"
 message = f"""From: Niels Smith
 To: Niels Smith
 Subject: Daily Danish

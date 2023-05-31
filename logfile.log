@@ -324,3 +324,13 @@ text
 2023-03-30 12:45:58,003 | MainThread   | INFO  | Got logger
 2023-03-30 12:46:58,823 | MainThread   | INFO  | Got logger
 2023-03-30 12:47:14,319 | MainThread   | INFO  | Got logger
+2023-05-29 12:48:57,231 | MainThread   | INFO  | Got logger
+2023-05-29 12:51:10,569 | MainThread   | INFO  | Got logger
+2023-05-29 12:52:25,996 | MainThread   | INFO  | Got logger
+2023-05-29 12:52:54,327 | MainThread   | INFO  | Got logger
+2023-05-29 12:53:05,005 | MainThread   | INFO  | Got logger
+2023-05-29 12:54:54,607 | MainThread   | INFO  | Got logger
+new words added to the Translation.CSV are importing correctly, but I need to figure out how to stop the proh.
+...from forcing the transition to Desktop to view the new terminal window that pops up2023-05-29 16:05:57,091 | MainThread   | INFO  | Got logger
+2023-05-30 14:02:39,327 | MainThread   | INFO  | Got logger
+2023-05-30 14:02:47,472 | MainThread   | INFO  | Got logger
