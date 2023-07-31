@@ -1,6 +1,6 @@
 # DAILY DANISH PYTHON CODE
 
-#  TODO  add to each row in the CSV so it has:
+# TODO  add to each row in the CSV so it has:
 # -1- Word with translation
 # -2- Example sentence
 # -3- Pronunciation
