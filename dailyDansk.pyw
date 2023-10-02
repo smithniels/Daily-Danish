@@ -23,7 +23,7 @@ log.info("Got logger")
 header = []
 rows = []
 with open(
-    "/Users/nielssmith/Documents/GitHub/Daily-Danish/translations.csv",
+    "/Users/nielssmith/Documents/Documents - Niels’s MacBook Air (2)/GitHub/Daily-Danish/translations.csv",
     "r",
     encoding='utf-8'
 ) as file:
