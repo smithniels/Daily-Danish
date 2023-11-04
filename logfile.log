@@ -331,7 +331,8 @@ text
 2023-05-29 12:53:05,005 | MainThread   | INFO  | Got logger
 2023-05-29 12:54:54,607 | MainThread   | INFO  | Got logger
 new words added to the Translation.CSV are importing correctly, but I need to figure out how to stop the proh.
-...from forcing the transition to Desktop to view the new terminal window that pops up2023-05-29 16:05:57,091 | MainThread   | INFO  | Got logger
+...from forcing the transition to Desktop to view the new terminal window that pops 
+up2023-05-29 16:05:57,091 | MainThread   | INFO  | Got logger
 2023-05-30 14:02:39,327 | MainThread   | INFO  | Got logger
 2023-05-30 14:02:47,472 | MainThread   | INFO  | Got logger
 2023-07-30 19:28:50,358 | MainThread   | INFO  | Got logger
@@ -342,3 +343,11 @@ new words added to the Translation.CSV are importing correctly, but I need to fi
 2023-08-02 11:41:09,944 | MainThread   | INFO  | Got logger
 2023-08-02 11:41:42,221 | MainThread   | INFO  | Got logger
 2023-08-12 14:12:37,568 | MainThread   | INFO  | Got logger
+2023-11-04 13:00:58,049 | MainThread   | INFO  | Got logger
+2023-11-04 13:01:22,681 | MainThread   | INFO  | Got logger
+2023-11-04 13:02:20,837 | MainThread   | INFO  | Got logger
+2023-11-04 13:02:27,555 | MainThread   | INFO  | Got logger
+2023-11-04 13:02:31,706 | MainThread   | INFO  | Got logger
+2023-11-04 13:03:41,473 | MainThread   | INFO  | Got logger
+2023-11-04 13:07:25,235 | MainThread   | INFO  | Got logger
+2023-11-04 13:23:35,784 - Daily Danish Log - INFO - Got logger

@@ -13,17 +13,25 @@ from email.message import EmailMessage
 from email.mime.text import MIMEText
 import smtplib
 import os
-import helper
+# import helper
+import logging
 
-# Get logger
-log = helper.logHelper("logfile.log")
-log.info("Got logger")
+# Configure Logger
+logging.basicConfig(
+    filename="logfile.log",
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    level=logging.INFO
+)
+
+# Create a logger instance!
+Logger = logging.getLogger("Daily Danish Log")
+Logger.info("Got logger")
 
 # Import CSV file
 header = []
 rows = []
 with open(
-    "/Users/nielssmith/Documents/Documents - Niels’s MacBook Air (2)/GitHub/Daily-Danish/translations.csv",
+    "/Users/nielssmith/Documents/Documents - Niels’s MacBook Air (2)/GitHub/Daily-Danish/translations2.csv",
     "r",
     encoding='utf-8'
 ) as file:
