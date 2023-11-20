@@ -1,0 +1,3 @@
+([('dailyDansk',
+   '/Users/nielssmith/Documents/GitHub/Daily-Danish/dist/dailyDansk',
+   'EXECUTABLE')],)
