@@ -2,7 +2,7 @@
 
 
 a = Analysis(
-    ['dailyDansk.pyw'],
+    ['dailydansk.pyw'],
     pathex=[],
     binaries=[],
     datas=[],
@@ -21,7 +21,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='dailyDansk',
+    name='dailydansk',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -37,7 +37,7 @@ exe = EXE(
 )
 app = BUNDLE(
     exe,
-    name='dailyDansk.app',
+    name='dailydansk.app',
     icon=None,
     bundle_identifier=None,
 )

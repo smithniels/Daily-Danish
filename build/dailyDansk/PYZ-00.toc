@@ -1,4 +1,4 @@
-('/Users/nielssmith/Documents/GitHub/Daily-Danish/build/dailyDansk/PYZ-00.pyz',
+('/Users/nielssmith/Documents/GitHub/Daily-Danish/build/dailydansk/PYZ-00.pyz',
  [('_compat_pickle',
    '/Users/nielssmith/opt/anaconda3/lib/python3.9/_compat_pickle.py',
    'PYMODULE'),
