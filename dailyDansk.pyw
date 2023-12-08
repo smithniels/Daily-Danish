@@ -22,6 +22,7 @@ log.info("Got logger")
 # Import CSV file
 header = []
 rows = []
+# The .open() method in python is used to open files and return a file object "csvreader".
 with open(
     "/Users/nielssmith/Documents/GitHub/Daily-Danish/translations.csv",
     "r",
