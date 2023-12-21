@@ -5,15 +5,19 @@
 # -2- Example sentence
 # -3- Pronunciation
 
-import base64
-from random import choice
-import csv
-from codecs import encode
-from email.message import EmailMessage
-from email.mime.text import MIMEText
-import smtplib
-import os
+
+#
+# /* REFACTOR (SELECT CODE --> RIGHT CLICK ---> Refactor) */
 import helper
+import os
+import smtplib
+from email.mime.text import MIMEText
+from email.message import EmailMessage
+from codecs import encode
+import csv
+from random import choice
+import base64
+print("RESEARCH/Try that refactor function in VSCODE")
 
 # Get logger
 log = helper.logHelper("logfile.log")
