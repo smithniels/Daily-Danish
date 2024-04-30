@@ -6,7 +6,6 @@
 # -3- Pronunciation
 
 
-#
 # /* REFACTOR (SELECT CODE --> RIGHT CLICK ---> Refactor) */
 import helper
 import os
@@ -36,7 +35,7 @@ with open(
     header = next(csvreader)  # Return the next item from the iterator.
     words = list(csvreader)
     word1 = choice(words)  # choose a random element (type: list)
-    wordA = "~".join(word1)
+    wordA = "  ".join(word1)
     wordB = encode(
         wordA, "utf-8"
     )
