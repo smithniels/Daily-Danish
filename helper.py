@@ -1,30 +1,29 @@
-#file log_helper.py
-import os
-import sys
+# file log_helper.py
 import logging
+import sys
+
 
 def logHelper(fileName, logLevel=logging.INFO, useConsole=True):
-    ##### init logging
+    # init logging
     log = logging.getLogger()
     log.setLevel(logLevel)
-    logFormatter = logging.Formatter("%(asctime)s | %(threadName)-12.12s | %(levelname)-5.5s | %(message)s")
+    logFormatter = logging.Formatter(
+        "%(asctime)s | %(threadName)-12.12s | %(levelname)-5.5s | %(message)s"
+    )
 
-    ##### file handler
+    # file handler
     fileOut = logging.FileHandler(fileName)
     fileOut.setFormatter(logFormatter)
     log.addHandler(fileOut)
-    
 
-    ##### console handler
+    # console handler
     if useConsole:
         consoleOut = logging.StreamHandler(sys.stdout)
         consoleOut.setFormatter(logFormatter)
         log.addHandler(consoleOut)
 
-
     return log
-    logging.info('text for .info() doodeedoo')
-
+    logging.info("text for .info() doodeedoo")
 
     """
     Simple Logging Helper. Returns logger reference.

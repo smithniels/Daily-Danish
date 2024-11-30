@@ -1,4 +1,4 @@
 __version__ = '.09'
 __author__ = 'Niels Smith'
 __contact__ = 'smithniels@gmail.com'
-__homepage__ = 'http://smithniels.com/ | https://smithniels.github.io/portolioNi/'
+__homepage__ = 'http://smithniels.com/'

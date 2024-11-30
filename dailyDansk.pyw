@@ -6,17 +6,17 @@
 # -3- Pronunciation
 
 
-# /* REFACTOR (SELECT CODE --> RIGHT CLICK ---> Refactor) */
-import helper
-import os
-import smtplib
-from email.mime.text import MIMEText
-from email.message import EmailMessage
-from codecs import encode
-import csv
-from random import choice
 import base64
+from random import choice
+import csv
+from codecs import encode
+from email.message import EmailMessage
+from email.mime.text import MIMEText
+import smtplib
+import os
+import helper
 print("RESEARCH/Try that refactor function in VSCODE")
+# /* REFACTOR (SELECT CODE --> RIGHT CLICK ---> Refactor) */
 
 # Get logger
 log = helper.logHelper("logfile.log")
@@ -90,6 +90,8 @@ try:
     smtp_server.ehlo()
     smtp_server.login(username, password)
     smtp_server.sendmail(username, username, message)
+    # smtp_server.sendmail(username2, username, message)
+    # ysername2 = ''
     smtp_server.close()
     print("Email sent successfully!")
 # noinspection PyBroadException
